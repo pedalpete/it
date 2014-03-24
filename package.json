@@ -4,7 +4,7 @@
     "description":"jquery like library for interacting with IoT devices",
     "version":"0.1.0",
     "main":"./lib/it.js",
-    "keywords":['IoT", "it", "favor", "favor.it"],
+    "keywords":["IoT", "it", "favor", "favor.it"],
     "scripts": {
     "test": "jasmine-node tests"
     },
