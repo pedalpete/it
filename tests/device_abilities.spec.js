@@ -1,12 +1,5 @@
 var $$ = require('../lib/device_abilities.js');
 
-describe("device build", function(){
-   it("should describe the structure of the device", function(){
-      var build =$$();
-      expect(build.name).toBe('Test-Device');   
-   });
-});
-
 describe("components", function(){
     it("should find a matching single component", function(){
         var led = $$('led');
