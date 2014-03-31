@@ -1,5 +1,6 @@
 {
     "name":"Test-Device",
+    "gpio-path": "tests/gpio-test/class/gpio",
     "components" : [{"type":"led", "address": 1, "interface":"gpio"},
                     {"type":"led", "address": 2, "interface":"gpio"},
                     {"type":"light", "address": 3, "interface": "gpio"},
