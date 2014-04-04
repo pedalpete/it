@@ -1,6 +1,5 @@
 var $$ =  require('../lib/favor_obj_builder.js')('./tests/mock_favorit.json');
 
-console.log($$());
 describe("components", function(){
     it("should find a matching single component", function(){
         var led = $$('led');
