@@ -10,5 +10,7 @@ describe("setters getters", function(){
         expect(led.get()).toBe(0);
         led.set('high');
         expect(led.get()).toBe(1);
+        led.set(0).set(1).set(3);
+        expect(led.get()).toBe(3);
     });
 });
