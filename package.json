@@ -9,10 +9,10 @@
     "test": "jasmine-node tests"
     },
     "dependencies":{
+         "fs-extra":"latest"
     },
     "devDependencies":{
-        "jasmine-node":"latest",
-        "fs-extra":"latest"
+        "jasmine-node":"latest"
     },
     "repository": {
         "type": "git",
