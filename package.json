@@ -9,7 +9,8 @@
     "test": "jasmine-node tests"
     },
     "dependencies":{
-         "fs-extra":"latest"
+        "gpio":"*",
+        "q":">=1.0.1"
     },
     "devDependencies":{
         "jasmine-node":"latest"

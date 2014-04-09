@@ -15,22 +15,4 @@ describe("device build", function(){
         expect($$().getTracking).toBeDefined();   
    });
     
-    
-    it("should set the path of inputs (gpio for now)", function(){
-    
-        expect($$().getGpioPath()).toBe(gpioPath);
-        
-           
-            expect(parseInt(fs.readFileSync(gpioPath+'/export','utf-8'),10)).toBeGreaterThan(0);
-            
-            var pin1d = fs.readFileSync(gpioPath+'1/direction','utf-8');
-            var pin1v = fs.readFileSync(gpioPath+'1/value','utf-8');
-            expect(pin1d).toBe('out');
-            expect(parseInt(pin1v,10)).toBe(0);
-           
-      
-    });
-    
-   
-    
 });
