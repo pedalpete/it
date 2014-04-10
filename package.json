@@ -9,8 +9,7 @@
     "test": "jasmine-node tests"
     },
     "dependencies":{
-        "gpio":"*",
-        "q":">=1.0.1"
+        "gpio":"*"
     },
     "devDependencies":{
         "jasmine-node":"latest"
