@@ -8,13 +8,13 @@ describe("components", function(){
     
     it("should match multiple components", function(){
         var leds = $$('leds');
+        expect(leds.length).toBeGreaterThan(3);
         expect(leds[0].address).toBe(1);
         expect(leds[1].address).toBe(2);
     });
     
-    it("should match equivelant components eg: led = lights, tri-color-led, etc.", function(){
-        var leds = $$('leds');
-        expect(leds[2].address).toBe(3);
-        expect(leds[3].address[0]).toBe(4);
+    it("should get the correct number of results", function(){
+        var leds = $$('leds*3');
+        expect(leds.length).toBe(3);
     });
 });
