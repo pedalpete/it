@@ -12,7 +12,7 @@ var $$ = require('../lib/favor_obj_builder.js')('./tests/mock_favorit.json');
 describe("device build", function(){
    it("should describe the structure of the device", function(){
         expect($$().name).toBe('Test-Device');
-        expect($$().getTracking).toBeDefined();   
+        expect($$().get).toBeDefined();   
    });
     
 });
