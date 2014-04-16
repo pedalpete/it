@@ -18,4 +18,11 @@ describe("components", function(){
         var leds = $$('leds*3');
         expect(leds.length).toBe(3);
     });
+    
+    it("should get the led by name", function(){
+       var led = $$('led#rgb');
+        expect(led[0].address.red).toBe(4);
+        expect(led[0].address.green).toBe(5);
+        expect(led[0].address.blue).toBe(6);
+    });
 });
