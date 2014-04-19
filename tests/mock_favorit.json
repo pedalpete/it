@@ -4,6 +4,7 @@
     "components" : [{"type":"led", "address": 1, "interface":"gpio"},
                     {"type":"led", "address": 2, "interface":"gpio"},
                     {"type":"led", "address": 3, "interface": "gpio"},
-                    {"type":"led", "name":"rgb", "address":{ "red": 4,"green": 5,"blue": 6 }, "interface": "gpio"}
+                    {"type":"led", "name":"rgb", "structure":{ "red":{
+                        "address":4},"green": {"address":5},"blue": {"address":6} }, "interface": "gpio"}
                     ]
 }

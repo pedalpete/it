@@ -21,8 +21,8 @@ describe("components", function(){
     
     it("should get the led by name", function(){
        var led = $$('led#rgb');
-        expect(led[0].address.red).toBe(4);
-        expect(led[0].address.green).toBe(5);
-        expect(led[0].address.blue).toBe(6);
+        expect(led[0].structure.red.address).toBe(4);
+        expect(led[0].structure.green.address).toBe(5);
+        expect(led[0].structure.blue.address).toBe(6);
     });
 });

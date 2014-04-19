@@ -10,7 +10,14 @@ describe("setters getters", function(){
         expect(led.onError).toHaveBeenCalled();
         led.set('high');
         expect(led.onError).toHaveBeenCalled();
-     /*   led.set(0).set(1).set(3); //can't run set tests off device ENOENT /sys/class/gpio errors
+
+        var rgb = $$('led#rgb');
+
+        console.log(rgb);
+        var get_rgb = rgb.get();
+        console.log(get_rgb);
+        
+        /*   led.set(0).set(1).set(3); //can't run set tests off device ENOENT /sys/class/gpio errors
         expect(led[0].gpio.value).toBe(3);
        */ 
     });
