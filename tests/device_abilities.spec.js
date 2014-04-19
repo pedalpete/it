@@ -25,4 +25,10 @@ describe("components", function(){
         expect(led[0].structure.green.address).toBe(5);
         expect(led[0].structure.blue.address).toBe(6);
     });
+    
+     it("should get the the led based on the color", function(){
+        var red_led = $$('leds.red,yellow');
+        expect(red_led[0].address).toBe(1);
+        expect(red_led[1].structure.red.address).toBe(4);
+    });
 });
