@@ -31,4 +31,9 @@ describe("components", function(){
         expect(red_led[0].address).toBe(1);
         expect(red_led[1].structure.red.address).toBe(4);
     });
+    
+    it("should not return where a class does not match", function(){
+       var no_match = $$('leds.none');
+        expect(no_match[0]).toBeUndefined();
+    });
 });
