@@ -16,3 +16,18 @@ describe("device build", function(){
    });
     
 });
+
+describe("get device with query", function(){
+    it("should return the query provided", function(){
+        expect($$('led').query).toBe('led'); 
+    });
+});
+
+describe("get device parsed query" , function(){
+    it("should show how the query was parsed", function(){
+        expect($$('led').parsed_query.type).toBe('led');
+        expect($$('led.blue,red').parsed_query.class[0]).toBe('blue');
+        expect($$('leds').parsed_query.plural).toBe(true);
+        expect($$('led*3').parsed_query.count).toBe(3);
+    });
+});
