@@ -21,5 +21,12 @@ describe("setters getters", function(){
        */ 
     });
     
+    it("should set the change watcher", function(){
+        var button = $$('button');
+        button.set(0);
+        button.onChange(function(val){ console.log(val)});
+        expect(button[0].gpio._events).toBeDefined();
+    });
+    
    
 });

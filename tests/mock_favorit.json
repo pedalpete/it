@@ -5,6 +5,7 @@
                     {"type":"led", "address": 2, "interface":"gpio"},
                     {"type":"led", "address": 3, "interface": "gpio"},
                     {"type":"led", "name":"rgb", "structure":{ "red":{
-                        "address":4},"green": {"address":5},"blue": {"address":6} }, "interface": "gpio"}
+                        "address":4},"green": {"address":5},"blue": {"address":6} }, "interface": "gpio"},
+                    {"type":"button", "name":"light","address":7}
                     ]
 }
