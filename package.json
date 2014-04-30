@@ -12,7 +12,8 @@
         "wiring-pi":"*"
     },
     "devDependencies":{
-        "jasmine-node":"latest"
+        "jasmine-node":"latest",
+        "fs-extra":"*"
     },
     "repository": {
         "type": "git",
