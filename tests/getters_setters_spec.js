@@ -39,7 +39,12 @@ describe("setters getters", function(){
         expect(button[0].initialized).toBeTruthy();
         return;
         */
-    });
-    
-   
+    });   
 });
+
+describe('it should use component defined methods', function(){
+    it('led.get should return "defined in component"', function(){
+        console.log($$('led').get());
+        expect($$('led').get()[0]).toBe("defined in component");
+    })
+})

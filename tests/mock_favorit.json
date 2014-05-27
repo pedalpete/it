@@ -1,7 +1,8 @@
 {
     "name":"Test-Device",
     "gpio-path": "tests/gpio-test/class/gpio",
-    "components" : [{"type":"led","color":"yellow", "address": 1, "interface":"gpio"},
+    "components" : [{"type":"led","color":"yellow", "address": 1, "interface":"gpio", "methods":[
+                    {"get":"../tests/component_methods_mock.js"}]},
                     {"type":"led", "address": 2, "interface":"gpio"},
                     {"type":"led", "address": 3, "interface": "gpio"},
                     {"type":"led", "name":"rgb", "structure":{ "red":{

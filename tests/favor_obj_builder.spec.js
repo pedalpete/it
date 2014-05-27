@@ -31,3 +31,9 @@ describe("get device parsed query" , function(){
         expect($$('led*3').parsed_query.count).toBe(3);
     });
 });
+
+describe("add component specfic methods", function(){
+    it("should have a test method", function(){
+        expect($$('led')[0].get()).toBeDefined();
+    });
+});
