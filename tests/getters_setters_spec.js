@@ -42,9 +42,17 @@ describe("setters getters", function(){
     });   
 });
 
-describe('it should use component defined methods', function(){
+describe('use component defined methods', function(){
     it('led.get should return "defined in component"', function(){
-        console.log($$('led').get());
         expect($$('led').get()[0]).toBe("defined in component");
     })
 })
+
+describe('use linked components', function(){
+    it('should get values from linked component', function(){
+        expect($$('temperature').get()[0]).toBe('26c');
+        expect($$('humidity').get()[0]).toBe(80);
+        expect($$('temperature.outside').get()[0]).toBe('26c');
+    });
+        
+});

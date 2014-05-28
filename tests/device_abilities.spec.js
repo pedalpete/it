@@ -37,3 +37,14 @@ describe("components", function(){
         expect(no_match[0]).toBeUndefined();
     });
 });
+
+describe("linked components", function(){
+   it('should return the linked component details', function(){
+        var temp =  $$('temperatures');
+        expect(temp[0].address).toBe(8);
+       console.log(temp);
+        var humidity = $$('humidity');
+        expect(humidity[0].address).toBe(8);
+        expect(temp[1].address).toBe(9);
+   });
+});

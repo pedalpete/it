@@ -37,3 +37,10 @@ describe("add component specfic methods", function(){
         expect($$('led')[0].get()).toBeDefined();
     });
 });
+
+describe("get values from linked component", function(){
+   it("should find the component details through the link", function(){
+        expect($$('temperature')[0]).toBeDefined();
+        expect($$('humidity')[0]).toBeDefined();
+   });
+});

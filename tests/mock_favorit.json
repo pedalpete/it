@@ -7,6 +7,13 @@
                     {"type":"led", "address": 3, "interface": "gpio"},
                     {"type":"led", "name":"rgb", "structure":{ "red":{
                         "address":4},"green": {"address":5},"blue": {"address":6} }, "interface": "gpio"},
-                    {"type":"button", "name":"light","address":7}
+                    {"type":"button", "name":"light","address":7},
+                    {"type":"link", "name":"rht03","address":8, "methods":[
+                        {"get":"../tests/mocks/linked_temp_humidity_mock.js"}]},
+                    {"type":"temperature","link":"rht03", "return_as":"temp"},
+                    {"type":"humidity","link":"rht03","return_as":"humidity"},
+                    {"type":"temperature", "name":"outside","link":"rht11","return_as":"temp"},
+                    {"type":"link","name":"rht11", "methods":[
+                        {"get":"../tests/mocks/linked_temp_humidity_mock.js"}],"structure":{"temp":{"address":9},"humidity":{"address":10}}}
                     ]
 }
