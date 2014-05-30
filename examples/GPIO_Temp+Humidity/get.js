@@ -2,6 +2,7 @@ var sensorLib = require('./node_modules/node-dht-sensor/build/Release/node-dht-s
 
 var sensor = {
   initialize: function(cmp) {
+      console.log(cmp);
     return sensorLib.initialize(cmp.chip_id, cmp.address);
   },
 
