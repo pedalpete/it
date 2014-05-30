@@ -1,4 +1,4 @@
-var sensorLib = require('../../node_modules/build/Release/node-dht-sensor');
+var sensorLib = require('node_modules/build/Release/node-dht-sensor');
 
 var sensor = {
   initialize: function(cmp) {
