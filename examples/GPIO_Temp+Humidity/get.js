@@ -2,12 +2,12 @@ var sensorLib = require('./node_modules/node-dht-sensor/build/Release/node-dht-s
 
 var sensor = {
   initialize: function(cmp) {
-      console.log(cmp);
     return sensorLib.initialize(cmp.chip_id, cmp.address);
   },
 
   read: function() {
     var readout = sensorLib.read();
+      console.log(readout);
     if (readout.humidity != 0 && readout.temperature != 0)
       return {'temperature': readout.temperature.toFixed(1), 'humidity': readout.humidity.toFixed(1)};
       console.log('error getting tmperature or humidity');
