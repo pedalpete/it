@@ -7,10 +7,7 @@ var sensor = {
 
   read: function() {
     var readout = sensorLib.read();
-      console.log(readout);
-    if (readout.humidity != 0 && readout.temperature != 0)
       return {'temperature': readout.temperature.toFixed(1), 'humidity': readout.humidity.toFixed(1)};
-      console.log('error getting tmperature or humidity');
   }
 };
 
