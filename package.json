@@ -13,7 +13,8 @@
     },
     "devDependencies":{
         "jasmine-node":"latest",
-        "fs-extra":"*"
+        "fs-extra":"*",
+        "node-dht-sensor":"*" //for node dht example
     },
     "repository": {
         "type": "git",
