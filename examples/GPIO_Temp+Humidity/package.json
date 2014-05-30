@@ -1,6 +1,6 @@
 {
     "author":"PedalPete",
-    "name":"Favor Temperature and Humidity GPIO example",
+    "name":"Favor_Temp+Humidity_Example",
     "description":"an example of using GPIO to get temperature and humidity with the Favor.it library",
     "version":"0.0.1",
     "main":"index.js",
