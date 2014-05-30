@@ -14,7 +14,6 @@
     "devDependencies":{
         "jasmine-node":"latest",
         "fs-extra":"*",
-        "node-dht-sensor":"*" //for node dht example
     },
     "repository": {
         "type": "git",
