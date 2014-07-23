@@ -13,7 +13,7 @@
     },
     "devDependencies":{
         "jasmine-node":"latest",
-        "fs-extra":"*",
+        "fs-extra":"*"
     },
     "repository": {
         "type": "git",
