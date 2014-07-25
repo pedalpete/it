@@ -9,7 +9,7 @@
     "test": "jasmine-node tests"
     },
     "dependencies":{
-        "wiring-pi":"*"
+        "pi-pins":"*"
     },
     "devDependencies":{
         "jasmine-node":"latest",

@@ -3,15 +3,19 @@ var $$ =  require('../lib/favor_obj_builder.js')('./tests/mock_favorit.json');
 describe("setters getters", function(){
     it("should get and set the values for the led", function(){
         var led = $$('led');
-        spyOn(led,'wpi');
         spyOn(led, "onError");
         var get_led = led.get();
+        console.log('get led', get_led);
         expect(get_led[0]).toBeDefined();
         led.set('low');
+        led.set(function(){});
         expect(led.onError).toHaveBeenCalled();
         led.set('high');
-        expect(led.onError).toHaveBeenCalled();
-
+        expect(led.get()).toBe('high');
+        led.set(0);
+        expect(led.get()).toBe('low');
+        led.set(true);
+        expect(led.get()).toBe('high');
         var rgb = $$('led#rgb');
         rgb.set(1).set(2).set(3).set(4);
         var get_rgb = rgb.get();
@@ -44,7 +48,7 @@ describe("setters getters", function(){
 
 describe('use component defined methods', function(){
     it('led.get should return "defined in component"', function(){
-        expect($$('led').get()[0]).toBe("defined in component");
+        expect($$('leds').get()[2]).toBe("defined in component");
     })
 })
 

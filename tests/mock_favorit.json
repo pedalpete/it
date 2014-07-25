@@ -1,10 +1,10 @@
 {
     "name":"Test-Device",
     "gpio-path": "tests/gpio-test/class/gpio",
-    "components" : [{"type":"led","color":"yellow", "address": 1, "interface":"gpio", "methods":[
-                    {"get":"../tests/component_methods_mock.js"}]},
+    "components" : [{"type":"led","color":"yellow", "address": 1, "interface":"gpio"},
                     {"type":"led", "address": 2, "interface":"gpio"},
-                    {"type":"led", "address": 3, "interface": "gpio"},
+                    {"type":"led", "address": 3, "interface": "gpio", "methods":[
+                    {"get":"../tests/component_methods_mock.js"}]},
                     {"type":"led", "name":"rgb", "structure":{ "red":{
                         "address":4},"green": {"address":5},"blue": {"address":6} }, "interface": "gpio"},
                     {"type":"button", "name":"light","address":7},
