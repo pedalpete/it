@@ -69,8 +69,7 @@ As your methods will be functions and are therefore not valid json, create your 
 A linked component is a special type of component where other components are linked to it, most likely as a descriptor. 
 For example. I had a combined temperature and humidity sensor, but I didn't want to always get both values, and what would I call such a sensor that would be consistent with other devices that only had temperature. So I created a linked component like this. 
 
-```{"type":"link","name":"rht11", "methods":[ {"get":"../tests/mocks/linked_temp_humidity.js"}],"structure":{"temp":{"address":9},"humidity":{"address":10}}}
-```
+```{"type":"link","name":"rht11", "methods":[ {"get":"../tests/mocks/linked_temp_humidity.js"}],"structure":{"temp":{"address":9},"humidity":{"address":10}}}```
 
 This linked component also happened to have it's own get method.
 Then, I described both the temperature and humidity components on their own.
