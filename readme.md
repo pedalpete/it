@@ -77,7 +77,7 @@ Then, I described both the temperature and humidity components on their own.
                     {"type":"temperature", "name":"outside","link":"rht11","return_as":"temp"}```
                     
 Using this method, we have a consistent way to get temperature from this linked sensor, or a temperature only sensor, but using
-```$$('temperature').get()```
+`$$('temperature').get()`
 
 ### Running Favor.it
 
