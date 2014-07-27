@@ -59,4 +59,15 @@ describe('use linked components', function(){
         expect($$('temperature.outside').get()[0]).toBe('26c');
     });
         
+describe('onChange events', function(){
+    it('should be triggered on set events', function(){
+        var led =  $$('led').set(0);
+        console.log('0',led[0]);
+        spyOn(led[0].gpio, "on");
+        led.onChange(function(){
+        });
+        led.set(1);
+        expect(led[0].gpio.on).toHaveBeenCalled();
+    });
+});
 });
