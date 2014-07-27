@@ -1,12 +1,12 @@
 var $$ = require('favor.it')();
 
-var tri-led = $$('led');
-tri-led.set(1);
+var triled = $$('led');
+triled.set(1);
 
 setInterval(function(){
     setTimeout(function(){
         // gpio should accept false as a valid value for on
-        tri-led.set(false);
+        triled.set(false);
     }, 1000);
 
     setTimeout(function(){
