@@ -1,4 +1,4 @@
-var $$ = require('favor.it')();
+var $$ = require('../../index.js')();
 
 var triled = $$('led');
 triled.set(1);
