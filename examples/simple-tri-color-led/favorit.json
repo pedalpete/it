@@ -1,0 +1,5 @@
+{
+    "name":"Tri-Led-Device",
+    "components" : [{"type":"led", "name":"rgb", "structure":{ "red":{
+                        "address":4},"green": {"address":5},"blue": {"address":6} }, "interface": "gpio"}
+}
