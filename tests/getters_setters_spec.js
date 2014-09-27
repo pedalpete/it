@@ -5,17 +5,15 @@ describe("setters getters", function(){
         var led = $$('led');
         spyOn(led, "onError");
         var get_led = led.get();
-        console.log('get led', get_led);
-        expect(get_led[0]).toBeDefined();
+        console.log(get_led);
         led.set('low');
-        led.set(function(){});
-        expect(led.onError).toHaveBeenCalled();
+        expect(led.get()).toBe(false);
         led.set('high');
-        expect(led.get()).toBe('high');
+        expect(led.get()).toBe(true);
         led.set(0);
-        expect(led.get()).toBe('low');
+        expect(led.get()).toBe(false);
         led.set(true);
-        expect(led.get()).toBe('high');
+        expect(led.get()).toBe(true);
         var rgb = $$('led#rgb');
         rgb.set(1).set(2).set(3).set(4);
         var get_rgb = rgb.get();
@@ -62,7 +60,6 @@ describe('use linked components', function(){
 describe('onChange events', function(){
     it('should be triggered on set events', function(){
         var led =  $$('led').set(0);
-        console.log('0',led[0]);
         spyOn(led[0].gpio, "on");
         led.onChange(function(){
         });
@@ -70,4 +67,10 @@ describe('onChange events', function(){
         expect(led[0].gpio.on).toHaveBeenCalled();
     });
 });
+});
+
+describe('working with i2c', function(){
+    it('should get i2c', function(){
+        var accel = $$('accelerometer');
+    });
 });

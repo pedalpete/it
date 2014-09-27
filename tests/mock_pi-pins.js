@@ -6,14 +6,16 @@ var mock_pi_pins = {
                             return this.pin;
                         },
                         value: function(val){
-                            if(val){
+                            if(val===undefined){
                                 //trigger 'on so we can test it'
                                 if(this_on_change){
                                     this_on_change.call();
                                 }
-                                this.pin.value=val;   
+                                this.pin.value=val;
+                                console.log('set val', this.pin.value, val);
                                 return this.pin;
                             }
+                            console.log('pin value', this.pin.value);
                             return this.pin.value || false;
                         },
                         on: function(dir,fn){
