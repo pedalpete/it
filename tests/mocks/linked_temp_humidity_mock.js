@@ -1,3 +1,3 @@
-module.exports = function(){
-    return {'temp': '26c', 'humidity': 80};
+module.exports = function(fvr,cmp,cb){
+    cb({'temp': '26c', 'humidity': 80});
 }

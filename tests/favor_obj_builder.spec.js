@@ -34,7 +34,7 @@ describe("get device parsed query" , function(){
 
 describe("add component specfic methods", function(){
     it("should have a test method", function(){
-        expect($$('leds')[2].get()).toBeDefined();
+        expect($$('leds')[2].get).toBeDefined();
     });
 });
 

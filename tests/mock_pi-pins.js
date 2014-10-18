@@ -11,12 +11,12 @@ var mock_pi_pins = {
                                 if(this_on_change){
                                     this_on_change.call();
                                 }
-                                this.pin.value=val;
-                                console.log('set val', this.pin.value, val);
-                                return this.pin;
+                    
+                                return this.pin.value || false;
                             }
-                            console.log('pin value', this.pin.value);
-                            return this.pin.value || false;
+                            this.pin.value=val;
+
+                            return this.pin;
                         },
                         on: function(dir,fn){
                                 this_on_change=fn;
