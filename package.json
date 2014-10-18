@@ -9,7 +9,8 @@
     "test": "jasmine-node tests"
     },
     "dependencies":{
-        "pi-pins":"*"
+        "pi-pins":"*",
+        "i2c":"*"
     },
     "devDependencies":{
         "jasmine-node":"latest",
