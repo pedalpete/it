@@ -7,13 +7,18 @@
                     {"get":"../tests/component_methods_mock.js"}]},
                     {"type":"led", "name":"rgb", "structure":{ "red":{
                         "address":4},"green": {"address":5},"blue": {"address":6} }, "interface": "gpio"},
-                    {"type":"button", "name":"light","address":7},
+                    {"type":"button", "name":"light","address":7, "interface": "gpio"},
                     {"type":"link", "name":"rht03","address":8, "methods":[
                         {"get":"../tests/mocks/linked_temp_humidity_mock.js"}]},
                     {"type":"temperature","link":"rht03", "return_as":"temp"},
                     {"type":"humidity","link":"rht03","return_as":"humidity"},
                     {"type":"temperature", "name":"outside","link":"rht11","return_as":"temp"},
                     {"type":"link","name":"rht11", "methods":[
-                        {"get":"../tests/mocks/linked_temp_humidity_mock.js"}],"structure":{"temp":{"address":9},"humidity":{"address":10}}}
-                    ]
+                        {"get":"../tests/mocks/linked_temp_humidity_mock.js"}],"structure":{"temp":{"address":9},"humidity":{"address":10}}},
+                    {"type":"accelerometer", "name": "bridge", "start":[
+                                                                        {"command": "0x2D", "write": ["1 << 3"]},
+                                                                        {"command": "0x31","write": ["0x09"]},
+                                                                        {"command": "0x2c", "write": ["8 + 2 + 1"]}
+                                                                        ]}
+                   ]
 }

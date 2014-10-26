@@ -7,15 +7,16 @@ var mock_pi_pins = {
                         },
                         value: function(val){
                             if(val===undefined){
-                                //trigger 'on so we can test it'
+                               
+                                return this.pin.value || false;
+                            }
+                            this.pin.value=val;
+                            
+                             //trigger 'on so we can test it'
                                 if(this_on_change){
                                     this_on_change.call();
                                 }
                     
-                                return this.pin.value || false;
-                            }
-                            this.pin.value=val;
-
                             return this.pin;
                         },
                         on: function(dir,fn){

@@ -21,7 +21,7 @@ setInterval(function(){
 
     setTimeout(function(){
         $$('led.red').set('LOW');
-        $$('led.blue').set(1);
+        $$('led .blue').set(1);
     },4000);
 
     setTimeout(function(){

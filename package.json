@@ -10,7 +10,8 @@
     },
     "dependencies":{
         "pi-pins":"*",
-        "i2c":"*"
+        "i2c":"*",
+        "mathjs":"*"
     },
     "devDependencies":{
         "jasmine-node":"latest",

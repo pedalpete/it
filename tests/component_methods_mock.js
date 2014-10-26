@@ -1,3 +1,3 @@
-module.exports = function(fvr,component,cb){
-	cb("defined in component");
+module.exports = function(cb){
+	cb.call(this,"defined in component");
 };
