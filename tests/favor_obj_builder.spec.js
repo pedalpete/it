@@ -34,13 +34,14 @@ describe("get device parsed query" , function(){
 
 describe("add component specfic methods", function(){
     it("should have a test method", function(){
-        expect($$('leds')[2].get).toBeDefined();
+        var leds = $$('leds');
+        expect(leds.components[leds._component_matches[2]].get).toBeDefined();
     });
 });
 
 describe("get values from linked component", function(){
    it("should find the component details through the link", function(){
-        expect($$('temperature')[0]).toBeDefined();
-        expect($$('humidity')[0]).toBeDefined();
+        expect($$('temperature')._component_matches[0]).toBeGreaterThan(-1);
+        expect($$('humidity')._component_matches[0]).toBeGreaterThan(-1);
    });
 });

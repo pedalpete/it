@@ -27,9 +27,8 @@ describe("setters getters", function(){
             //this just needs to be called   
         }
         spyOn(button, 'pressed');
-        button.set(0);
         button.onChange(button.pressed);
-        expect(button[0].initialized).toBeTruthy();
+        expect(button.components[button._component_matches[0]].initialized).toBeTruthy();
         button.set(1);
         expect(button.pressed).toHaveBeenCalled();
     });   
@@ -89,16 +88,19 @@ describe('use linked components', function(){
         });
         
     });
-        
+});
+
 describe('onChange events', function(){
     it('should be triggered on set events', function(){
     var changed = false;
-      var led = $$('led');
-        led.onChange('both',function(){
-            changed = true;
-        });
+     
         runs(function(){
+             var led = $$('led');
+            led.onChange('both',function(){
+                return changed = true;
+            });
             led.set(1, function(){
+                console.log('passed the change event');
             });
         });
         
@@ -110,7 +112,6 @@ describe('onChange events', function(){
            expect(changed).toBe(true); 
         });
     });
-});
 });
 
 describe('working with i2c', function(){
