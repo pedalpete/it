@@ -13,14 +13,14 @@ describe("setters getters", function(){
     
     it("should set and then get the value for the led", function(){
         var led = $$('led');
-        led.components[0].changed=1;
+        _fvr[led._component_matches[0]].changed=1;
         led.set(1,function(){
             led.get(function(l){
              expect(l).toBe(true);
             })
         });
         led.set(1, function(){
-           console.log('changed outside',led.components[0].changed); 
+         //  console.log('changed outside',_fvr[led._component_matches[0]].changed); 
         });
         
         $$('led').set(0);
@@ -33,7 +33,7 @@ describe("setters getters", function(){
         }
         spyOn(button, 'pressed');
         button.onChange(button.pressed);
-        expect(button.components[button._component_matches[0]].initialized).toBeTruthy();
+        expect(_fvr[button._component_matches[0]].initialized).toBeTruthy();
         button.set(1);
         expect(button.pressed).toHaveBeenCalled();
     });   
@@ -105,7 +105,7 @@ describe('onChange events', function(){
                 return changed = true;
             });
             led.set(1, function(){
-                console.log('passed the change event');
+               // console.log('passed the change event');
             });
         });
         
