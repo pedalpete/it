@@ -13,12 +13,17 @@ describe("setters getters", function(){
     
     it("should set and then get the value for the led", function(){
         var led = $$('led');
-        
+        led.components[0].changed=1;
         led.set(1,function(){
             led.get(function(l){
              expect(l).toBe(true);
             })
-        });        
+        });
+        led.set(1, function(){
+           console.log('changed outside',led.components[0].changed); 
+        });
+        
+        $$('led').set(0);
     });
     
     it("should set the change watcher", function(){
