@@ -1,18 +1,24 @@
-var cb = function(vars){
-    return 'called with '+ vars
+
+function increment(cmd,evt){
+    this.counts[cmd].push(evt.toString());
 }
-var writeByte =  function(byte){
-       return 'writeByte called with '+byte;
+
+var writeByte =  function(byte,cb){
+        increment.call(this,'writeByte', byte);
+        cb.call(this, null, byte.toString());
 };
-var writeBytes = function(command, bytes){
-    return 'writeBytes called with '+command+' ,'+ byte;   
+var writeBytes = function(command, bytes,cb){
+            increment.call(this,'writeBytes',[command, bytes]);
+            cb.call(this, null, [command, bytes].toString());
 };
-var readByte = function(byte){
-    return 'readByte called with '+byte;   
+var readByte = function(byte,cb){
+            increment.call(this,'readByte', byte);
+            cb.call(this, null, byte.toString());
 };
-var readBytes = function(command, bytes){
-    return 'readyBytes called with '+command+' ,'+bytes;   
-};
+var readBytes = function(command, bytes,cb){
+            increment.call(this,'readBytes', [command, bytes]);
+            cb.call(this, null, [command,bytes].toString());
+    };
 var on = function(data){
     var res;
     setTimeout(
@@ -24,16 +30,23 @@ var stream = function(command, length, delay){
     return 'stream called with '+command+' ,'+length+' ,'+delay;
 }
 
-var mock_i2c = {
+var mock_i2c = function(address, path){
+    return {
                     writeByte: writeByte,
                     writeBytes: writeBytes,
                     readByte: readByte,
                     readBytes: readBytes,
                     on: on,
-                    stream: stream
+                    stream: stream,
+                    counts: {
+                        writeByte: [],
+                        writeBytes: [],
+                        readByte: [],
+                        readBytes: []
+                    }
+    };
 };
 
-module.exports.connect = function(){
-    return mock_i2c;
-};
+module.exports =  mock_i2c;
+
 

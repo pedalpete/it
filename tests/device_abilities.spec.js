@@ -43,6 +43,7 @@ describe("linked components", function(){
    it('should return the linked component details', function(){
         var temp =  $$('temperatures');
         expect(_fvr[temp._component_matches[0]].address).toBe(8);
+        expect(_fvr[temp._component_matches[1]].address).toBe(9);
         var humidity = $$('humidity');
         expect(_fvr[humidity._component_matches[0]].address).toBe(8);
    });

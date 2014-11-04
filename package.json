@@ -6,7 +6,7 @@
     "main":"./lib/it.js",
     "keywords":["IoT", "it", "favor", "favor.it"],
     "scripts": {
-    "test": "jasmine-node tests"
+    "test": "jasmine-node tests/getters_setters_spec.js"
     },
     "dependencies":{
         "pi-pins":"*",
