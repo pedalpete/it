@@ -3,21 +3,29 @@ function increment(cmd,evt){
     this.counts[cmd].push(evt.toString());
 }
 
+function return_obj(cmds){
+    return {
+        counts: this.counts,
+        inputs: cmds.toString()
+    };
+}
+
 var writeByte =  function(byte,cb){
         increment.call(this,'writeByte', byte);
-        cb.call(this, null, byte.toString());
+        cb.call(this, null, return_obj.call(this, byte));
 };
 var writeBytes = function(command, bytes,cb){
             increment.call(this,'writeBytes',[command, bytes]);
-            cb.call(this, null, [command, bytes].toString());
+            cb.call(this, null, return_obj.call(this,[command, bytes]));
 };
 var readByte = function(byte,cb){
             increment.call(this,'readByte', byte);
-            cb.call(this, null, byte.toString());
+            cb.call(this, null, return_obj.call(this, byte));
 };
 var readBytes = function(command, bytes,cb){
             increment.call(this,'readBytes', [command, bytes]);
-            cb.call(this, null, [command,bytes].toString());
+            
+            cb.call(this, null, return_obj.call(this,[command, bytes]));
     };
 var on = function(data){
     var res;

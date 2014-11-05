@@ -1,5 +1,5 @@
 var $$ =  require('../lib/favor_obj_builder.js')('./tests/mock_favorit.json');
-/*
+
 describe("setters getters", function(){
     it("should initialize and get the values for the led", function(){
         var led = $$('led');
@@ -118,15 +118,15 @@ describe('onChange events', function(){
         });
     });
 });
-*/
+
 describe('working with i2c', function(){
     it('should get i2c', function(){
         
         var acc, mocki2c;
         runs(function(){
             var accel = $$('accelerometer').get(function(f){
-                mocki2c = this;
-                acc = f;
+                mocki2c = f.counts;
+                acc = f.inputs;
             });
         });
         
@@ -136,8 +136,8 @@ describe('working with i2c', function(){
          
         runs(function(){
             expect(acc).toBe('0x33,6');
-            expect(mocki2c.counts.writeBytes.length).toBe(3);
-            expect(mocki2c.counts.readBytes[0]).toBe('0x33,6');
+            expect(mocki2c.writeBytes.length).toBe(3);
+            expect(mocki2c.readBytes[0]).toBe('0x33,6');
         });
     });
 });
