@@ -122,7 +122,8 @@ describe('onChange events', function(){
 describe('working with i2c', function(){
     it('should get i2c', function(){
         
-        var acc, mocki2c;
+        var acc, mocki2c,
+            start = new Date();
         runs(function(){
             var accel = $$('accelerometer').get(function(f){
                 mocki2c = f.counts;
@@ -135,9 +136,35 @@ describe('working with i2c', function(){
         },3000)
          
         runs(function(){
+            var end = new Date();
+            expect(end.valueOf() - start.valueOf()).toBeLessThan(100);
             expect(acc).toBe('0x33,6');
             expect(mocki2c.writeBytes.length).toBe(3);
             expect(mocki2c.readBytes[0]).toBe('0x33,6');
         });
+    });
+    
+    it('should wait if a wait value is supplied', function(){
+         var acc, mocki2c,
+            start = new Date();
+        runs(function(){
+            var accel = $$('accelerometer#test_wait').get(function(f){
+                mocki2c = f.counts;
+                acc = f.inputs;
+            });
+        });
+        
+        waitsFor(function(){
+            return acc;
+        },3000)
+         
+        runs(function(){
+            var end = new Date();
+            expect(end.valueOf() - start.valueOf()).toBeGreaterThan(1000);
+            expect(acc).toBe('0x33,6');
+            expect(mocki2c.writeBytes.length).toBe(3);
+            expect(mocki2c.readBytes[0]).toBe('0x33,6');
+        });
+        
     });
 });
