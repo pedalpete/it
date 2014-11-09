@@ -1,5 +1,4 @@
-var $$ =  require('../lib/favor_obj_builder.js')('./tests/mock_favorit.json');
-
+var $$ =  require('../lib/favor_obj_builder.js')('../tests/mock_favorit');
 describe("components", function(){
     it("should find a matching single component", function(){
         var led = $$('led');
@@ -9,7 +8,7 @@ describe("components", function(){
     
     it("should match multiple components", function(){
         var leds = $$('leds');
-        expect(leds._component_matches.length).toBe(4);
+        expect(leds._component_matches.length).toBe(6);
         expect(_fvr[leds._component_matches[0]].address).toBe(1);
         expect(_fvr[leds._component_matches[1]].address).toBe(2);
     });

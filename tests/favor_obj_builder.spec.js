@@ -7,7 +7,7 @@ for(var i=0;i<=6;i++){
     fs.outputFileSync(gpioPath+i+'/direction','none','utf-8');
 }
 
-var $$ = require('../lib/favor_obj_builder.js')('./tests/mock_favorit.json');
+var $$ = require('../lib/favor_obj_builder.js')('../tests/mock_favorit');
 
 describe("device build", function(){
    it("should describe the structure of the device", function(){

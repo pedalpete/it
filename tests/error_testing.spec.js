@@ -1,4 +1,4 @@
-var $$ = require('../lib/favor_obj_builder.js')('./tests/mock_favorit.json');
+var $$ = require('../lib/favor_obj_builder.js')('../tests/mock_favorit');
 
 describe('error handling', function(){
     it('should allow the user to change the error handling', function(){

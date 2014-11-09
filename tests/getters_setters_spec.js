@@ -1,4 +1,4 @@
-var $$ =  require('../lib/favor_obj_builder.js')('./tests/mock_favorit.json');
+var $$ =  require('../lib/favor_obj_builder.js')('../tests/mock_favorit');
 
 describe("setters getters", function(){
     it("should initialize and get the values for the led", function(){
@@ -138,9 +138,11 @@ describe('working with i2c', function(){
         runs(function(){
             var end = new Date();
             expect(end.valueOf() - start.valueOf()).toBeLessThan(100);
-            expect(acc).toBe('0x33,6');
+            expect(acc).toBe('51,6');
             expect(mocki2c.writeBytes.length).toBe(3);
-            expect(mocki2c.readBytes[0]).toBe('0x33,6');
+            expect(mocki2c.writeBytes[0]).toBe('45,8');
+            expect(mocki2c.writeBytes[2]).toBe('44,11');
+            expect(mocki2c.readBytes[0]).toBe('51,6');
         });
     });
     
@@ -161,10 +163,49 @@ describe('working with i2c', function(){
         runs(function(){
             var end = new Date();
             expect(end.valueOf() - start.valueOf()).toBeGreaterThan(1000);
-            expect(acc).toBe('0x33,6');
+            expect(acc).toBe('51,6');
             expect(mocki2c.writeBytes.length).toBe(3);
-            expect(mocki2c.readBytes[0]).toBe('0x33,6');
+            expect(mocki2c.readBytes[0]).toBe('51,6');        
+        });
+    });
+    
+    it('should use the input value as the bytes value', function(){
+        var mocki2c;
+        var led = $$('led#blinkm');
+        runs(function(){
+            led.set([0,0,0],function(f){
+               mocki2c = f.counts; 
+            });
         });
         
+        waitsFor(function(){
+            return mocki2c; 
+        },1000);
+        
+        runs(function(){
+            expect(mocki2c.writeBytes.length).toBe(1);
+            expect(mocki2c.writeBytes[0]).toBe('110,0,0,0');
+        });  
     });
+    
+     it('should use take a function as the set value', function(){
+        var mocki2c;
+        var led = $$('led#blinkm_with_func');
+        runs(function(){
+            led.set([0,0,0],function(f){
+               mocki2c = f.counts; 
+            });
+        });
+        
+        waitsFor(function(){
+            return mocki2c; 
+        },1000);
+        
+        runs(function(){
+            expect(mocki2c.writeBytes.length).toBe(1);
+            expect(mocki2c.writeBytes[0]).toBe('110,1,1,1');
+        });  
+    });
+    
+    
 });
