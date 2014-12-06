@@ -27,7 +27,7 @@ module.exports = {
                                                                         {cmd:"write",byte: 0x31, bytes: [0x09],wait:500},
                                                                         {cmd:"write",byte: 0x2c, bytes: [8 + 2 + 1], wait: 500}], 
                     get:{cmd:"read", byte:0x33, bytes:6}, interface:"i2c"},
-                    {type:"led", name: "blinkm", address: 0x09, set: {cmd:"write", byte:0x6E, bytes: true },interface:"i2c"},
+                    {type:"led", name: "blinkm", address: 0x09, init: {cmd:"write", byte: 0x6d}, set: {cmd:"write", byte:0x6E, bytes: true },interface:"i2c"},
                     {type:"led", address: 0x05, name: "blinkm_with_func", set: {cmd:"write", byte:0x6E, bytes: function(val){
                                                                                             return [1,1,1];
                                                                                             }
