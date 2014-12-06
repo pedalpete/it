@@ -192,7 +192,8 @@ describe('working with i2c', function(){
         var mocki2c;
         var led = $$('led#blinkm_with_func');
         runs(function(){
-            led.set([0,0,0],function(f){
+            led.set(function(){
+                return [1,1,1]},function(f){
                mocki2c = f.counts; 
             });
         });
@@ -207,5 +208,24 @@ describe('working with i2c', function(){
         });  
     });
     
+    it('should get the correct function after initialized', function(){
+        var mocki2c;
+        runs(function(){
+            $$('led#blinkm').set([2,2,2], function(f){
+                mocki2c=f.counts;
+            });
+        });
+        
+        waitsFor(function(){
+           return mocki2c;
+        },1000);
+        
+        runs(function(){
+            expect(mocki2c.writeBytes.length).toBe(2);
+            expect(mocki2c.writeBytes[1]).toBe('110,2,2,2');
+        });
+        
+        
+    });
     
 });
