@@ -224,8 +224,25 @@ describe('working with i2c', function(){
             expect(mocki2c.writeBytes.length).toBe(2);
             expect(mocki2c.writeBytes[1]).toBe('110,2,2,2');
         });
+    });
+    
+    it('should be able to use a "get" method after set', function(){
+       var mocki2c; 
+        runs(function(){
+            $$('led#blinkm').get(function(f){
+                console.log(f);
+                mocki2c=f.counts;
+            });
+        });
         
+        waitsFor(function(){
+            return mocki2c;
+        },1000);
         
+        runs(function(){
+           expect(mocki2c.readBytes.length).toBe(0); 
+        });
+            
     });
     
 });
