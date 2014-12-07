@@ -226,12 +226,13 @@ describe('working with i2c', function(){
         });
     });
     
-    it('should be able to use a "get" method after set', function(){
-       var mocki2c; 
+    it('should error if get or set is not defined', function(){
+       var mocki2c;
+        var led = $$('led#blinkm');
+        spyOn(led, 'onError');
         runs(function(){
-            $$('led#blinkm').get(function(f){
-                console.log(f);
-                mocki2c=f.counts;
+           led.get(function(f){
+                mocki2c=f;
             });
         });
         
@@ -240,7 +241,8 @@ describe('working with i2c', function(){
         },1000);
         
         runs(function(){
-           expect(mocki2c.readBytes.length).toBe(0); 
+           expect(led.onError).toHaveBeenCalled(); 
+            expect(mocki2c.err).toBeDefined();
         });
             
     });
