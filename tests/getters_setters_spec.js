@@ -119,6 +119,45 @@ describe('onChange events', function(){
     });
 });
 
+describe('post_action', function(){
+    it('should run a post_action function before returning on gpio', function(){
+         var changed = false;
+        var x;
+        runs(function(){
+            $$('temperature#post_action').get(function(val){
+                x = val;   
+                changed = true;
+            });
+        });
+        
+        waitsFor(function(){
+            return changed;
+        }, 1000);
+            
+        runs(function(){
+            expect(x).toBe('post_format returned'); 
+        });
+    });
+    it('should run a post_action function before returning on i2c', function(){
+        var changed = false;
+        var x;
+        runs(function(){
+            $$('accelerometer#post_action').get(function(val){
+                x = val;   
+                changed = true;
+            });
+        });
+        
+        waitsFor(function(){
+            return changed;
+        }, 1000);
+            
+        runs(function(){
+            expect(x).toBe('post_format returned'); 
+        });
+    });
+});
+
 describe('working with i2c', function(){
     it('should get i2c', function(){
         
