@@ -1,25 +1,29 @@
 {
-    "author":"PedalPete",
-    "name":"IT",
-    "description":"jquery like library for interacting with IoT devices",
-    "version":"0.1.0",
-    "main":"./lib/it.js",
-    "keywords":["IoT", "it", "favor", "favor.it"],
-    "scripts": {
+  "author": "PedalPete",
+  "name": "IT",
+  "description": "jquery like library for interacting with IoT devices",
+  "version": "0.1.0",
+  "main": "./lib/it.js",
+  "keywords": [
+    "IoT",
+    "it",
+    "favor",
+    "favor.it"
+  ],
+  "scripts": {
     "test": "jasmine-node tests"
-    },
-    "dependencies":{
-        "pi-pins":"*",
-        "i2c":"*",
-        "mathjs":"*"
-    },
-    "devDependencies":{
-        "jasmine-node":"latest",
-        "fs-extra":"*"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/favor/it.git"
-    }
+  },
+  "dependencies": {
+    "pi-pins": "*",
+    "i2c": "*",
+    "mathjs": "*"
+  },
+  "devDependencies": {
+    "fs-extra": "*",
+    "jasmine-node": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/favor/it.git"
+  }
 }
-   

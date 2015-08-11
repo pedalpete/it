@@ -227,7 +227,7 @@ describe('working with i2c', function(){
         });  
     });
     
-     it('should use take a function as the set value', function(){
+     it('should take a function as the set value', function(){
         var mocki2c;
         var led = $$('led#blinkm_with_func');
         runs(function(){

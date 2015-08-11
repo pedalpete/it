@@ -1,3 +1,4 @@
+var mockstream = require('mockstream');
 
 function increment(cmd,evt){
     this.counts[cmd].push(evt.toString());
@@ -35,7 +36,11 @@ var on = function(data){
         }, 2000);
 };
 var stream = function(command, length, delay){
-    return 'stream called with '+command+' ,'+length+' ,'+delay;
+    var Stream = new mockstream.MockDataStream({
+       chunkSize: length,
+       streamLength: length * 10 
+    });
+    Stream.start();
 }
 
 var mock_i2c = function(address, path){
