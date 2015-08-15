@@ -32,7 +32,7 @@ describe("setters getters", function(){
             //this just needs to be called   
         }
         spyOn(button, 'pressed');
-        button.onChange(button.pressed);
+        button.on('change', button.pressed);
         expect(_fvr[button._component_matches[0]].initialized).toBeTruthy();
         button.set(1);
         expect(button.pressed).toHaveBeenCalled();
@@ -95,13 +95,13 @@ describe('use linked components', function(){
     });
 });
 
-describe('onChange events', function(){
+describe('on Change events', function(){
     it('should be triggered on set events', function(){
     var changed = false;
      
         runs(function(){
              var led = $$('led');
-            led.onChange('both',function(){
+            led.on('change', 'both', function(){
                 return changed = true;
             });
             led.set(1, function(){
@@ -117,6 +117,34 @@ describe('onChange events', function(){
            expect(changed).toBe(true); 
         });
     });
+});
+
+describe('watch for data on gpio elements', function() {
+   it('should trigger the eventEmitter on data updates', function() {
+       var watchEvents = [];
+       var done = false;
+       function watch (data) {
+            watchEvents.push(data);
+            if (watchEvents.length === 4) $$('temperature').removeListener('data', watch); 
+            setTimeout(function() {
+                done = true;
+            }, 1000);
+       }
+       runs(function() {
+          $$('temperature').on('data', watch);
+       });
+
+       waitsFor(function() {
+           return done;
+       }, 2000);
+       
+       runs(function() {
+           expect(watchEvents.length).toBe(4); 
+       });
+       
+   }); 
+   
+    
 });
 
 describe('post_action', function(){
@@ -162,7 +190,7 @@ describe('working with i2c', function(){
     it('should get i2c', function(){
         
         var acc, mocki2c,
-            start = new Date();
+start = new Date();
         runs(function(){
             var accel = $$('accelerometer').get(function(f){
                 mocki2c = f.counts;
@@ -186,8 +214,8 @@ describe('working with i2c', function(){
     });
     
     it('should wait if a wait value is supplied', function(){
-         var acc, mocki2c,
-            start = new Date();
+        var acc, mocki2c,
+        start = new Date();
         runs(function(){
             var accel = $$('accelerometer#test_wait').get(function(f){
                 mocki2c = f.counts;
@@ -284,6 +312,31 @@ describe('working with i2c', function(){
             expect(mocki2c.err).toBeDefined();
         });
             
+    });
+    
+    it('should watch i2c', function(){
+       var watchEvents = [];
+       var done = false;
+       var removedEvt = false;
+       function watch (data) {
+            watchEvents.push(data.counts);
+            if (watchEvents.length === 4) $$('accelerometer#test_wait').removeListener('data', watch);
+            setTimeout(function() {
+                done = true;
+            }, 1000); 
+       }
+      
+        runs(function(){
+           $$('accelerometer#test_wait').on('data', watch);
+        });
+        
+        waitsFor(function(){
+            return done;
+        },3000)
+         
+        runs(function(){
+            expect(watchEvents.length).toBe(4);        
+        });
     });
     
 });
