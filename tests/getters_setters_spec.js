@@ -338,5 +338,30 @@ start = new Date();
             expect(watchEvents.length).toBe(4);        
         });
     });
-    
+
+    it('should initialize and watch i2c', function(){
+       var watchEvents = [];
+       var done = false;
+       var removedEvt = false;
+       function watch (data) {
+            watchEvents.push(data.counts);
+            if (watchEvents.length === 5) $$('accelerometer#init_stream').removeListener('data', watch);
+            setTimeout(function() {
+                done = true;
+            }, 1000); 
+       }
+      
+        runs(function(){
+           $$('accelerometer#init_stream').on('data', watch);
+        });
+        
+        waitsFor(function(){
+            return done;
+        },3000)
+         
+        runs(function(){
+            expect(watchEvents.length).toBe(5);        
+        });
+    });
+
 });

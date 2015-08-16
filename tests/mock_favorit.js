@@ -26,7 +26,12 @@ module.exports = {
                                                                         {cmd:"write",byte: 0x2c, bytes: [8 + 2 + 1]}
                                                                         ], 
                     get:{cmd:"read", byte:0x33, bytes:6}, interface:"i2c"},
-                     {type:"accelerometer", name: "test_wait", address: 0x1d, init:[
+                    {type:"accelerometer", name: "test_wait", address: 0x1d, init:[
+                                                                        {cmd:"write",byte: 0x2D, bytes: [1 << 3]},
+                                                                        {cmd:"write",byte: 0x31, bytes: [0x09],wait:500},
+                                                                        {cmd:"write",byte: 0x2c, bytes: [8 + 2 + 1], wait: 500}], 
+                    get:{cmd:"read", byte:0x33, bytes:6}, interface:"i2c"},
+                    {type:"accelerometer", name: "init_stream", address: 0x1d, init:[
                                                                         {cmd:"write",byte: 0x2D, bytes: [1 << 3]},
                                                                         {cmd:"write",byte: 0x31, bytes: [0x09],wait:500},
                                                                         {cmd:"write",byte: 0x2c, bytes: [8 + 2 + 1], wait: 500}], 
@@ -42,6 +47,6 @@ module.exports = {
                                                                         {cmd:"write",byte: 0x2c, bytes: [8 + 2 + 1]}
                                                                         ], 
                     get:{cmd:"read", byte:0x33, bytes:6}, interface:"i2c", post_action: post_format},
-                  {type:"temperature", name:"post_action",  address: 9, interface:"gpio", post_action: post_format}
+                  {type:"temperature", name:"post_action",  address: 9, interface:"gpio", post_action: post_format},
                    ]
 }
