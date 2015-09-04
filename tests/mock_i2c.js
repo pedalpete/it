@@ -1,4 +1,4 @@
-var mockstream = require('mockstream');
+
 
 function increment(cmd,evt){
     this.counts[cmd].push(evt.toString());
@@ -19,11 +19,11 @@ var writeBytes = function(command, bytes,cb){
             increment.call(this,'writeBytes',[command, bytes]);
             cb.call(this, null, return_obj.call(this,[command, bytes]));
 };
-var readByte = function(byte,cb){
+var readByte = function(byte, cb){
             increment.call(this,'readByte', byte);
             cb.call(this, null, return_obj.call(this, byte));
 };
-var readBytes = function(command, bytes,cb){
+var readBytes = function(command, bytes, cb){
             increment.call(this,'readBytes', [command, bytes]);
             
             cb.call(this, null, return_obj.call(this,[command, bytes]));

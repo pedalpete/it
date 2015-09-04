@@ -14,9 +14,10 @@
     "test": "jasmine-node tests"
   },
   "dependencies": {
-    "pi-pins": "*",
+    "async": "^1.4.2",
     "i2c": "*",
-    "mathjs": "*"
+    "mathjs": "*",
+    "pi-pins": "*"
   },
   "devDependencies": {
     "fs-extra": "*",
