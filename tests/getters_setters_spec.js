@@ -385,3 +385,26 @@ describe('working with i2c', function(){
     });
     
 });
+
+describe('spi', function(){
+   it('should initialize a new spi', function(){
+       var getSpi = false;
+       var device;
+       runs(function(){
+           $$('temperature#init_spi').get(function(data){
+               console.log(this);
+               device = this;
+               getSpi = data;
+           });
+       });
+       
+       waitsFor(function(){
+           return getSpi;
+       },1000);
+       
+       runs(function(){
+           expect(getSpi.length).toBe(6);
+           expect(_fvr[device._index].initialized).toBeTruthy();
+       });
+   });
+});

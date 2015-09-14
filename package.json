@@ -16,8 +16,8 @@
   "dependencies": {
     "async": "^1.4.2",
     "i2c": "*",
-    "mathjs": "*",
-    "pi-pins": "*"
+    "pi-pins": "*",
+    "spi": "*"
   },
   "devDependencies": {
     "fs-extra": "*",

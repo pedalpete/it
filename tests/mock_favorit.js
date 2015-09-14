@@ -47,6 +47,7 @@ module.exports = {
                                                                         {cmd:"write",byte: 0x2c, bytes: [8 + 2 + 1]}
                                                                         ], 
                     get:{cmd:"read", byte:0x33, bytes:6}, interface:"i2c", post_action: post_format},
-                  {type:"temperature", name:"post_action",  address: 9, interface:"gpio", post_action: post_format}
+                  {type:"temperature", name:"post_action",  address: 9, interface:"gpio", post_action: post_format},
+                  {type:"temperature", name:"init_spi", interface: 'spi', address: '/dev/spidev0.0', mode: 'MODE_0', chipSelect: 'high', get: [ 0x23, 0x48, 0xAF, 0x19, 0x19, 0x19 ]}
                    ]
 }
