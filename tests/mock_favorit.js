@@ -15,7 +15,7 @@ module.exports = {
                     {type:"button", name:"light",address:7, interface: "gpio"},
                     {type:"link", name:"rht03",address:8, methods:[
                         {get:require("../tests/mocks/linked_temp_humidity_mock")}], interface: "gpio"},
-                    {type:"temperature",link:"rht03", return_as:"temp"},
+                    {type:"temperature", name:"link",link:"rht03", return_as:"temp"},
                     {type:"humidity",link:"rht03",return_as:"humidity"},
                     {type:"temperature", name:"outside",link:"rht11",return_as:"temp"},
                     {type:"link",name:"rht11", methods:[
@@ -48,6 +48,6 @@ module.exports = {
                                                                         ], 
                     get:{cmd:"read", byte:0x33, bytes:6}, interface:"i2c", post_action: post_format},
                   {type:"temperature", name:"post_action",  address: 9, interface:"gpio", post_action: post_format},
-                  {type:"temperature", name:"init_spi", interface: 'spi', address: '/dev/spidev0.0', mode: 'MODE_0', chipSelect: 'high', get: [ 0x23, 0x48, 0xAF, 0x19, 0x19, 0x19 ]}
+                  {type:"temperature", name:"spi", interface: 'spi', address: '/dev/spidev0.0', mode: 'MODE_0', chipSelect: 'high', get: [ 0x23, 0x48, 0xAF, 0x19, 0x19, 0x19 ]}
                    ]
 }

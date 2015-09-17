@@ -33,30 +33,19 @@ var Spi = function(device, options, callback) {
 
     this.device = device;
 
-    isFunction(callback) && callback(this); // TODO: Update once open is async;
+    isFunction(callback) && callback(this);
 }
 
 Spi.prototype.open = function() {
-
-    this.open = this.device;
+    if (this.opened) return this.opened++;
+    this.opened = 1;
 }
 
 Spi.prototype.close = function() {
-    return this.close = true;
-}
-/*
-Spi.prototype.write = function(buf, callback) {
-    this._spi.transfer(buf, new Buffer(buf.length));
-
-    isFunction(callback) && callback(this, buf); // TODO: Update once open is async;
+    if (this.closed) return this.closed++;
+    this.closed = 1;
 }
 
-Spi.prototype.read = function(buf, callback) {
-    this._spi.transfer(new Buffer(buf.length), buf);
-
-    isFunction(callback) && callback(this, buf); // TODO: Update once open is async;
-}
-*/
 Spi.prototype.transfer = function(txbuf, rxbuf, callback) {
     // tx and rx buffers need to be the same size
     this.spiTransfer = {
@@ -64,7 +53,10 @@ Spi.prototype.transfer = function(txbuf, rxbuf, callback) {
         read: rxbuf.toString('utf-8')
     };
 
-    isFunction(callback) && callback(this, rxbuf); // TODO: Update once open is async;
+    isFunction(callback) && callback(this, rxbuf);
+    if (this.transferred) return this.transferred++;
+    this.transferred = 1;
+    
 }
 
 Spi.prototype.mode = function(mode) {
