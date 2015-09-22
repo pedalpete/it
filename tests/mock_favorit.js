@@ -15,9 +15,9 @@ module.exports = {
                     {type:"button", name:"light",address:7, interface: "gpio"},
                     {type:"link", name:"rht03",address:8, methods:[
                         {get:require("../tests/mocks/linked_temp_humidity_mock")}], interface: "gpio"},
-                    {type:"temperature", name:"link",link:"rht03", return_as:"temp"},
-                    {type:"humidity",link:"rht03",return_as:"humidity"},
-                    {type:"temperature", name:"outside",link:"rht11",return_as:"temp"},
+                    {type:"temperature", name:"link",link:"rht03", returnAs:"temp"},
+                    {type:"humidity",link:"rht03",returnAs:"humidity"},
+                    {type:"temperature", name:"outside",link:"rht11",returnAs:"temp"},
                     {type:"link",name:"rht11", methods:[
                         {get: require("../tests/mocks/linked_temp_humidity_mock")}],structure:{"temp":{"address":9},humidity:{address:10}}, interface:"gpio"},
                     {type:"accelerometer", name: "bridge", address: 0x11, init: [
