@@ -13,14 +13,14 @@ describe("setters getters", function(){
     
     it("should set and then get the value for the led", function(){
         var led = $$('led');
-        _fvr[led._component_matches[0]].changed=1;
+        _fvr[led._componentMatches[0]].changed=1;
         led.set(1,function(){
             led.get(function(l){
              expect(l).toBe(true);
             })
         });
         led.set(1, function(){
-         //  console.log('changed outside',_fvr[led._component_matches[0]].changed); 
+         //  console.log('changed outside',_fvr[led._componentMatches[0]].changed); 
         });
         
         $$('led').set(0);
@@ -34,7 +34,7 @@ describe("setters getters", function(){
         }
        
         button.on('change', pressed);
-        expect(_fvr[button._component_matches[0]].initialized).toBeTruthy();
+        expect(_fvr[button._componentMatches[0]].initialized).toBeTruthy();
 
         runs(function() {
             button.set(1);

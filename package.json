@@ -21,6 +21,9 @@
   },
   "devDependencies": {
     "fs-extra": "*",
+    "gulp": "^3.9.0",
+    "gulp-jscs": "^2.0.0",
+    "gulp-jshint": "^1.11.2",
     "jasmine-node": "latest"
   },
   "repository": {

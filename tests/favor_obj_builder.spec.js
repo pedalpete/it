@@ -25,23 +25,23 @@ describe("get device with query", function(){
 
 describe("get device parsed query" , function(){
     it("should show how the query was parsed", function(){
-        expect($$('led').parsed_query.type).toBe('led');
-        expect($$('led.blue,red').parsed_query.class[0]).toBe('blue');
-        expect($$('leds').parsed_query.plural).toBe(true);
-        expect($$('led*3').parsed_query.count).toBe(3);
+        expect($$('led').parsedQuery.type).toBe('led');
+        expect($$('led.blue,red').parsedQuery.class[0]).toBe('blue');
+        expect($$('leds').parsedQuery.plural).toBe(true);
+        expect($$('led*3').parsedQuery.count).toBe(3);
     });
 });
 
 describe("add component specfic methods", function(){
     it("should have a test method", function(){
         var leds = $$('leds');
-        expect(_fvr[leds._component_matches[2]].get).toBeDefined();
+        expect(_fvr[leds._componentMatches[2]].get).toBeDefined();
     });
 });
 
 describe("get values from linked component", function(){
    it("should find the component details through the link", function(){
-        expect($$('temperature')._component_matches[0]).toBeGreaterThan(-1);
-        expect($$('humidity')._component_matches[0]).toBeGreaterThan(-1);
+        expect($$('temperature')._componentMatches[0]).toBeGreaterThan(-1);
+        expect($$('humidity')._componentMatches[0]).toBeGreaterThan(-1);
    });
 });
