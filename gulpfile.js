@@ -10,8 +10,7 @@ gulp.task('jshint', function() {
     .pipe(jshint.reporter('default'));
 });
 
-gulp.task('style', function () {
-    
+gulp.task('jscs', function () {
     return gulp.src(jsFiles)
         .pipe(jscs());
 });
