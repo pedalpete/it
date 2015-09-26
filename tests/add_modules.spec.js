@@ -1,8 +1,10 @@
-var $$ =  require('../index.js')('../tests/mock_favorit');
+var $$ =  require('../index.js')('../tests/mocks/favorit');
 
-describe('setting the device object prototype methods', function(){
-    it('should add the get and set methods to the prototype of the global device object',function() {
-	    expect($$().get).toBeDefined();   
-        expect($$('led').get).toBeDefined();
-    });
+describe('setting the device object prototype methods', function() {
+	it('should add the get and set methods', function() {
+		expect($$().get).toBeDefined();
+		expect($$('led').get).toBeDefined();
+		expect($$().set).toBeDefined();
+		expect($$('led').set).toBeDefined();
+	});
 });

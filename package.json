@@ -11,7 +11,7 @@
     "favor.it"
   ],
   "scripts": {
-    "test": "jasmine-node tests"
+    "test": "jasmine-node tests --autotest --watch"
   },
   "dependencies": {
     "async": "^1.4.2",
