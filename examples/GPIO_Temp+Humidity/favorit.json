@@ -1,6 +1,6 @@
 {
     "name":"Test-Temperature",
     "gpio-path": "tests/gpio-test/class/gpio",
-    "components" : [{"type":"temperature", "address": 4, "chip_id": 22, "interface":"gpio", "initialize": true, "methods":[
+    "components" : [{"type":"temperature", "address": 4, "chipid": 22, "interface":"gpio", "initialize": true, "methods":[
                     {"get":"../examples/GPIO_Temp+Humidity/get.js"}]}]
 }

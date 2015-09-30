@@ -158,13 +158,13 @@ describe('watch for data on gpio elements', function() {
 });
 
 */
-describe('post_action', function() {
-	it('should run a post_action before returning on gpio', function() {
+describe('postAction', function() {
+	it('should run a postAction before returning on gpio', function() {
 		var changed = false;
 		var x;
 
 		runs(function() {
-			$$('temperature#post_action').get(function(val) {
+			$$('temperature#postAction').get(function(val) {
 				x = val;
 				changed = true;
 			});
@@ -175,15 +175,15 @@ describe('post_action', function() {
 		}, 1000);
 
 		runs(function() {
-			expect(x).toBe('post_format returned');
+			expect(x).toBe('postFormat returned');
 		});
 	});
 
-	it('should run a post_action function before returning on i2c', function() {
+	it('should run a postAction function before returning on i2c', function() {
 		var changed = false;
 		var x;
 		runs(function() {
-			$$('accelerometer#post_action').get(function(val) {
+			$$('accelerometer#postAction').get(function(val) {
 				x = val;
 				changed = true;
 			});
@@ -194,7 +194,7 @@ describe('post_action', function() {
 		}, 1000);
 
 		runs(function() {
-			expect(x).toBe('post_format returned');
+			expect(x).toBe('postFormat returned');
 		});
 	});
 });
@@ -349,7 +349,7 @@ describe('working with i2c', function() {
 		},3000);
 
 		runs(function() {
-			expect(watchEvents.length).toBeGreaterThan(4);        
+			expect(watchEvents.length).toBeGreaterThan(4);
 		});
 	});
 
@@ -357,12 +357,14 @@ describe('working with i2c', function() {
 		var watchEvents = [];
 		var done = false;
 		var removedEvt = false;
-		function watch (data) {
+		function watch(data) {
 			watchEvents.push(data.counts);
-			if (watchEvents.length === 5) $$('accelerometer#init_stream').removeListener('data', watch);
+			if (watchEvents.length === 5) {
+				 $$('accelerometer#init_stream').removeListener('data', watch);
+			}
 			setTimeout(function() {
 				done = true;
-			}, 1000); 
+			}, 1000);
 		}
 
 		runs(function() {
@@ -374,7 +376,7 @@ describe('working with i2c', function() {
 		},3000);
 
 		runs(function() {
-			expect(watchEvents.length).toBeGreaterThan(5);        
+			expect(watchEvents.length).toBeGreaterThan(5);
 		});
 	});
 
@@ -385,7 +387,7 @@ describe('spi', function() {
 		var getSpi = false;
 		var device;
 		runs(function() {
-			$$('temperature#spi').get(function(data) {	
+			$$('temperature#spi').get(function(data) {
 				device = this;
 				getSpi = data;
 			});
@@ -428,9 +430,9 @@ describe('spi', function() {
 		var reqs = 0;
 		var device;
 		var getSpi = false;
-		function getData (data) {
+		function getData(data) {
 			reqs++;
-			if(reqs === 5) {
+			if (reqs === 5) {
 				device = this;
 				getSpi = data;
 			}
