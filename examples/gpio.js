@@ -6,9 +6,9 @@ var ledGet = $$('led').get();
 $$('button').onChange(changeLights);
 
 function changeLights() {
-ledGet = $$('led').get()[0];
+	ledGet = $$('led').get()[0];
 	if (ledGet.blue === 0 && ledGet.green === 0) return led.set(1, 'blue');
-	if (ledGet.blue===1 && ledGet.green === 0) {
+	if (ledGet.blue === 1 && ledGet.green === 0) {
 		led.set(0,'blue');
 		return led.set(1,'green');
 	}

@@ -360,7 +360,7 @@ describe('working with i2c', function() {
 		function watch(data) {
 			watchEvents.push(data.counts);
 			if (watchEvents.length === 5) {
-				 $$('accelerometer#init_stream').removeListener('data', watch);
+				$$('accelerometer#init_stream').removeListener('data', watch);
 			}
 			setTimeout(function() {
 				done = true;
