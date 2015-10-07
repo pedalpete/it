@@ -92,13 +92,14 @@ You can provide a structure that describes the makeup of that component.
 As a simple example, take an RGB LED, the simple 4-prong type. You would not want to always turn on 
 each address at the same time, so you can provide a structure. 
 For example, an RGB LED may look like this. 
-```structure: { "red" : 15,
+`structure: { "red" : 15,
                 "blue" : 16,
                 "green": 17
-                }```
+                }` 
+where each entry in the structure points to an address.  
                
 NOTE: a `structure` component is different from a `link` component where a `link` describes multiple
-components on a single chip, a `structure` describes multiple addresses on a single component.
+components on a single chip, a `structure` describes multiple addresses on a single component. They can be used together.
 
 ##### component.name (string) required for linked components
 This is simply a descriptive name of the component. 
@@ -106,11 +107,14 @@ The exception is a component of type `link` where the name is very important bec
 child descriptor back to the parent.
 
 In the `link` example above.
-`{"type": "humidity", "link": "rht11", "returnAs": "humidity"}` was linked to `{"type": "link", "name": "rht11", "structure":{ "temp": {"address": 9}, "humidity": {"address": 10}}}` via the `name`
+`{"type": "humidity", "link": "rht11", "returnAs": "humidity"}` was linked to `{"type": "link", "name": "rht11", "structure":{ "temp": {"address": 9}, "humidity": {"address": 10}}}` via the `name`.
+
   
 
 ##### component.methods (object)
-the component methods allows you to specify special methods available to that component. One very important use for this is when you have a component which doesn't respond to the standard Favor-it get or set methods. You can provide your own get or set method within this object. When calling get or set, Favor-it will check to see if your component has it's own get or set method already defined.
+component methods allows you to specify special methods available to that component. One very important use for this is when you have a component which doesn't respond to the standard 
+Favor-it get or set methods. You can provide your own get or set method within this object. 
+When calling get or set, Favor-it will check to see if your component has it's own get or set method already defined.
 
 When a component has it's own get or set method, the component is passed into it's own get method so you can retrieve and set any variables on the component itself. 
 
@@ -124,6 +128,7 @@ Now, include the Favor-it module in your app.
 `var $$ = require('Favor-it')()`
 NOTE: you start Favor-it as a function, so don't forget the extra params at the end. If you don't want to have your favorit.js file in the root path of your app, you can define a path within the function call like this
 `var $$ = require('Favor-it')(path_to_your_favorit.js)`
+You can also set the path to your favorit.js as a environment variable.
 
 ### Kinda like jQuery
 If you know jQuery (and even if you don't) I hope it won't take you too long to get the hang of using Favor-it.
@@ -135,6 +140,5 @@ Favor-it has a very rudamentary pluralizer and the return from a query will retu
 
 `$$('.green')` will get you anything that has a value of green on any key, and will return all of them. There is no such thing as 'greens'. 
 
-Sorry for ducking out now, much more, and more documentation to come. Hit me up with any questions. 
 
 
