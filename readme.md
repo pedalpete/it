@@ -12,7 +12,7 @@ Favor-it works with GPIO, i2C and SPI protocols (SPI has not been tested on hard
 
 ### How Does It Work?
 
-Favor-it uses a js file (optionally called `favorit.js`) on stored on the device which describes the structure of your hardware.
+Favor-it uses a js file (optionally called `favorit.js`) stored on the device which describes the structure of your hardware.
 It queries this js file, similar to how jQuery parses and interacts with the DOM. 
 Once Favor-it knows what devices are connected, and how to interact with them, 
 you can easly write jQuery style statements like `$$('temperature').get()`
@@ -20,8 +20,11 @@ you can easly write jQuery style statements like `$$('temperature').get()`
 
 ### What are the benefits of Favor-it 
 1) a consistent api for interacting with different devices and protocols
+
 2) a separation of concerns between hardware and software
+
 3) write-once run-anywhere type code
+
 4) testable logic which will run across different hardware devices
 
 ### How do we get started?
@@ -79,11 +82,15 @@ or a temperature only sensor, but using `$$('temperature').get()`
 
 Describes the hardware interface to the component. 
 
-##### component.address (number | hex) 
+##### component.address (number | hex | string) 
 
 This is the address of the component.
+Required for components which do not have a structure defined - see below.
 
-Required for gpio | i2c components which do not have a structure defined - see below.
+###### gpio number
+###### i2c hex
+###### spi string of spi bus address
+
 
 ##### component.structure (object)
 Some components don't have a single address, or are a compilation of multiple components. 
@@ -109,7 +116,12 @@ child descriptor back to the parent.
 In the `link` example above.
 `{"type": "humidity", "link": "rht11", "returnAs": "humidity"}` was linked to `{"type": "link", "name": "rht11", "structure":{ "temp": {"address": 9}, "humidity": {"address": 10}}}` via the `name`.
 
-  
+##### component.get (array) i2c | Spi
+###### i2c 
+An object of addresses to get written to the i2c bus in order to interact with the component.
+See interacting with i2c
+###### spi
+The buffer array to get passed to the component. Note do not create this as a buffer, just pass the array and it will be converted to a buffer before being submitted to the component
 
 ##### component.methods (object)
 component methods allows you to specify special methods available to that component. One very important use for this is when you have a component which doesn't respond to the standard 
@@ -119,6 +131,36 @@ When calling get or set, Favor-it will check to see if your component has it's o
 When a component has it's own get or set method, the component is passed into it's own get method so you can retrieve and set any variables on the component itself. 
 
 As your methods will be functions and are therefore not valid json, create your methods as a node.js module, and provide the path to the module as if you were going to require the module. When Favor-it starts-up, it will build it's object and include all your methods via require statements.  
+
+#### Interacting with i2c
+i2c can be a bit special, and I was found it really complicated to understand at first. 
+There are a few things that need to happen to interact with an i2c component.
+
+1) the component 'might' need to be initialized
+
+2) the component 'might' need to send a series of bits and bytes to the device to get and set
+
+3) the items that are sent might of a read or write type.
+
+Therefore, an i2c component has a few special methods
+##### init get set (array)
+each command sent to the i2c bus is expected to be an array. 
+
+The array holds a series of objects, each object representing a single command which is either write or read.
+
+###### cmd (string) 'write' | 'read' required
+Quite simply this states weather the current command is a write or read command.
+###### byte (hex) required
+This is the address the command needs to be written to.
+###### bytes (array of hex) optional
+This is an array of hex values which will be written to the address
+###### wait (number milliseconds) optional
+Some i2c components require a time period to be passed before the next command can be written. The `wait` attribute will pause
+after the current command is written and will continue with the next command in the array after the alloted time has been waited.
+
+
+
+
 
 ### Running Favor-it
 
