@@ -11,7 +11,7 @@
     "favor.it"
   ],
   "scripts": {
-    "test": "jasmine-node tests --autotest --watch"
+    "test": "envade DEVICE_MOCK_PATH=../../tests/mocks/ -- jasmine-node tests --autotest --watch"
   },
   "dependencies": {
     "async": "^1.4.2",
@@ -20,6 +20,7 @@
     "spi": "*"
   },
   "devDependencies": {
+    "envade": "^1.0.3",
     "fs-extra": "*",
     "gulp": "^3.9.0",
     "gulp-jscs": "^2.0.0",
