@@ -46,14 +46,14 @@ module.exports = {
 			set: {cmd: 'write', byte: 0x6E, bytes: function(val) {
 				return [1,1,1];
 			}}, interface: 'i2c'},
-		{type: 'accelerometer', name: 'postAction', address: 0x11, init: [
+		{type: 'accelerometer', name: 'formatOutput', address: 0x11, init: [
 			{cmd: 'write', byte: 0x2D, bytes: [1 << 3]},
 			{cmd: 'write', byte: 0x31,bytes: [0x09]},
 			{cmd: 'write', byte: 0x2c, bytes: [8 + 2 + 1]}],
 			get: {cmd: 'read', byte: 0x33, bytes: 6}, interface: 'i2c',
-				postAction: postFormat},
-		{type: 'temperature', name: 'postAction',  address: 9, interface: 'gpio',
-			postAction: postFormat},
+				formatOutput: postFormat},
+		{type: 'temperature', name: 'formatOutput',  address: 9, interface: 'gpio',
+			formatOutput: postFormat},
 		{type: 'temperature', name: 'spi', interface: 'spi',
 			address: '/dev/spidev0.0',
 			mode: 'MODE_0',	chipSelect: 'high',

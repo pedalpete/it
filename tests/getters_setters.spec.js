@@ -158,13 +158,13 @@ describe('watch for data on gpio elements', function() {
 });
 
 */
-describe('postAction', function() {
-	it('should run a postAction before returning on gpio', function() {
+describe('formatOutput', function() {
+	it('should run a formatOutput before returning on gpio', function() {
 		var changed = false;
 		var x;
 
 		runs(function() {
-			$$('temperature#postAction').get(function(val) {
+			$$('temperature#formatOutput').get(function(val) {
 				x = val;
 				changed = true;
 			});
@@ -179,11 +179,11 @@ describe('postAction', function() {
 		});
 	});
 
-	it('should run a postAction function before returning on i2c', function() {
+	it('should run a formatOutput function before returning on i2c', function() {
 		var changed = false;
 		var x;
 		runs(function() {
-			$$('accelerometer#postAction').get(function(val) {
+			$$('accelerometer#formatOutput').get(function(val) {
 				x = val;
 				changed = true;
 			});
