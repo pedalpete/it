@@ -271,8 +271,8 @@ describe('working with i2c', function() {
 		var mocki2c;
 		var led = $$('led#blinkm_with_func');
 		runs(function() {
-			led.set(function() {
-				return [1,1,1];}, function(f) {
+			led.set({r: 1, g: 2, b: 3},
+				function(f) {
 				mocki2c = f.counts;
 			});
 		});
@@ -283,7 +283,7 @@ describe('working with i2c', function() {
 
 		runs(function() {
 			expect(mocki2c.writeBytes.length).toBe(1);
-			expect(mocki2c.writeBytes[0]).toBe('110,1,1,1');
+			expect(mocki2c.writeBytes[0]).toBe('110,1,2,3');
 		});
 	});
 
