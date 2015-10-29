@@ -135,6 +135,17 @@ In the `link` example above.
  ``` 
  via the `name`.
 
+#### component.formatInput (function)
+This is a very important method for converting a consistent data input to an input which will work with 
+your specific component. 
+
+The function should accept a single value as an object or value, and output the value in the format the component
+requires the input to be in.
+
+This way, for coloured leds which require a different format for different types of leds, you could 
+use a single common method of defining a color scheme, for example an object `{r: x, g: y, b: z}` and the 
+format input to convert the input object into the format the chip requires to show the correct color.
+
 #### component.get & component.set (array) i2c | Spi
 ##### i2c 
 An array of objects which will be written to the i2c bus in order to interact 
@@ -288,3 +299,15 @@ using only the name `$$('#drive')`, or the name combined with the type `$$('moto
 You can query by other params by using dot and comma notation. For example, to get all
 the yellow and red leds, you can query with `$$('.red,yellow')`. This would get all components
 that have any attribute where the value is either red or yellow.  
+
+##### Getting data from a component
+Simply use the `$$('temperature').get(callback)` and the temperature value returned by the temperature 
+component will be passed as a value into the callback function you provide.
+
+##### Setting data on a component
+Simply use the `$$('led').set(value, callback)` and the value you set will be applied to the component.
+For components where the set input value may not be consistent across similar components, it is
+important to use the `formatInput` to convert a standardized input into one will work with the component
+you are interacting with.
+
+As Favorit matures, the goal is to settle on a standardized input formats for different types of components.
