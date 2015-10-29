@@ -66,7 +66,7 @@ will still work.
 A linked component looks like this. 
 
 ```
-{"type": "link", "name": "rht11", "structure":{ ": {"address": 9}, "humidity": {"address": 10}
+{"type": "link", "name": "rht11", "structure":{ "temperature": {"address": 9}, "humidity": {"address": 10}
 	}}
 ```
 
@@ -84,7 +84,7 @@ or a temperature only sensor, but using `$$('temperature').get(callback)`
 
 Describes the hardware interface to the component. 
 
-##### component.address (number | hex | string) 
+#### component.address (number | hex | string) 
 
 This is the address of the component. Valid for each protocol are
 ```
@@ -113,7 +113,7 @@ NOTE: a `structure` component is different from a `link` component where a `link
 components on a single chip, a `structure` describes multiple addresses on a single component. The main 
 difference being that a structure does not define it's components seperately. Using the rgb led example,
 you wouldn't independently reference the red of a tri-color led, as the red component is likely not considered
-descreet. The same with say the 'x' axis of an accelerometer would rarely be considered completely outside the 
+screet. The same with say the 'x' axis of an accelerometer would rarely be considered completely outside the 
 context of the other axiis.
 
 #### component.name (string) required for linked components, optional for others
@@ -135,9 +135,9 @@ In the `link` example above.
  ``` 
  via the `name`.
 
-#### component.get (array) i2c | Spi
+#### component.get & component.set (array) i2c | Spi
 ##### i2c 
-An object of addresses which will be written to the i2c bus in order to interact 
+An array of objects which will be written to the i2c bus in order to interact 
 with the component.
 
 See interacting with i2c
@@ -147,12 +147,21 @@ The buffer array to get passed to the component.
 Note do not create this as a buffer, just pass the array and it will be 
 converted to a buffer before being submitted to the component.
 
-#### component.methods (object)
-component methods allows you to specify special methods available to that component. One very important use for this is when you have a component which doesn't respond to the standard 
+#### component.methods (array of objects)
+component methods allows you to specify special methods available to that component. One very important use for this is when 
+you have a component which doesn't respond to the standard 
 favorit get or set methods. You can provide your own get or set method within this object. 
 When calling get or set, favorit will check to see if your component has it's own get or set method already defined.
 
-When a component has it's own get or set method, the component is passed into it's own get method so you can retrieve and set any variables on the component itself. 
+An example component method 
+```
+{type: 'link', name: 'rht03', address: 8, methods: [
+	{get: require('./linked_temp_humidity_mock')}], 
+interface: 'gpio'}
+```
+
+The rht03 references above has a specific way of interacting with and cannot simply be read like a 
+standard GPIO pin. Therefore, this code will run the get method which was provided in the methods array. 
 
 
 ### Interacting with i2c
@@ -166,6 +175,7 @@ There are a few things that need to happen to interact with an i2c component.
 3) the items that are sent might be of a read or write type.
 
 Therefore, an i2c component has a few special methods
+
 #### init get set (array || object)
 each command sent to the i2c bus is expected to be an array. 
 
@@ -226,7 +236,7 @@ Sets if the chip should go high or low to select.
 
 Valid values are 'high' or 'low'.
 
-#### get set required (array of values)
+#### get set (array of hex)
 Send a get or set command to the SPI device. This is an array of hex values
 which will be sent to the device. 
 
