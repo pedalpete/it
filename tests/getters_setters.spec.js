@@ -198,3 +198,23 @@ describe('formatOutput', function() {
 		});
 	});
 });
+
+describe('format input', function(){
+	it('should pass the set value through a format function', function() {
+		var x;
+		runs(function(){
+			$$('led#rgb').set({r:15, g: 0, b:250}, function(){
+				console.log(this);
+				x = this._valueToSet
+			});
+		});
+		
+		waitsFor(function(val){
+			x = val;
+		},1000);
+		
+		runs(function(){
+			expects(x).toBe(1);
+		});
+	});
+});
