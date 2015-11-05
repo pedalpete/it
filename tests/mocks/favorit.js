@@ -13,7 +13,11 @@ module.exports = {
 		{get: require('./component_methods')}]},
 		{type: 'led', name: 'rgb', structure: {
 			red: {address: 4}, green: {address: 5}, blue: {address: 6}
-		}, interface: 'gpio'},
+		}, interface: 'gpio', formatInput: function(x) {
+			if (typeof x === 'string') return x;
+			
+			return 1;
+		}},
 		{type: 'button', name: 'light',address: 7, interface: 'gpio'},
 		{type: 'link', name: 'rht03',address: 8, methods: [
 			{get: require('./linked_temp_humidity_mock')}], interface: 'gpio'},
