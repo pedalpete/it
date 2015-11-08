@@ -16,7 +16,7 @@ module.exports = {
 		}, interface: 'gpio', formatInput: function(x) {
 			if (typeof x === 'string') return x;
 			
-			return 1;
+			return x[Object.keys(this._component.structure)[this._index]];
 		}},
 		{type: 'button', name: 'light',address: 7, interface: 'gpio'},
 		{type: 'link', name: 'rht03',address: 8, methods: [

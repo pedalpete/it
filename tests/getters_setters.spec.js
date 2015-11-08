@@ -201,20 +201,24 @@ describe('formatOutput', function() {
 
 describe('format input', function(){
 	it('should pass the set value through a format function', function() {
-		var x;
+		var x = {
+			'red' : null, 
+			'green' : null, 
+			'blue' : null
+		};
 		runs(function(){
 			$$('led#rgb').set({red:250, green:40, blue:8}, function(){
-				console.log('value to set', this._valueToSet);
-				x = this._valueToSet
+				
+				x[Object.keys(this._component.structure)[this._index]] = this._valueToSet
 			});
 		});
 		
 		waitsFor(function() {
-			return x;
+			return x.blue;
 		}, 1000);
 		
 		runs(function(){
-			expect(x).toBe(1);
+			expect(x.red).toBe(250);
 		});
 	});
 });
