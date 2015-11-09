@@ -199,25 +199,25 @@ describe('formatOutput', function() {
 	});
 });
 
-describe('format input', function(){
+describe('format input', function() {
 	it('should pass the set value through a format function', function() {
 		var x = {
-			'red' : null, 
-			'green' : null, 
-			'blue' : null
+			'red': null,
+			'green': null,
+			'blue': null
 		};
-		runs(function(){
-			$$('led#rgb').set({red:250, green:40, blue:8}, function(){
-				
-				x[Object.keys(this._component.structure)[this._index]] = this._valueToSet
+
+		runs(function() {
+			$$('led#rgb').set({red: 250, green: 40, blue: 8}, function() {
+				x[Object.keys(this._component.structure)[this._index]] = this._valueToSet;
 			});
 		});
-		
+
 		waitsFor(function() {
 			return x.blue;
 		}, 1000);
-		
-		runs(function(){
+
+		runs(function() {
 			expect(x.red).toBe(250);
 		});
 	});

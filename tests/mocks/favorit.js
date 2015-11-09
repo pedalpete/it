@@ -15,7 +15,7 @@ module.exports = {
 			red: {address: 4}, green: {address: 5}, blue: {address: 6}
 		}, interface: 'gpio', formatInput: function(x) {
 			if (typeof x === 'string') return x;
-			
+
 			return x[Object.keys(this._component.structure)[this._index]];
 		}},
 		{type: 'button', name: 'light',address: 7, interface: 'gpio'},
