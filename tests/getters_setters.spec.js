@@ -9,7 +9,7 @@ describe('setters getters', function() {
 	});
 
 	it('should set and then get the value for the led', function() {
-		var led = $$('led');
+		var led = $$('led*1');
 		_fvr[led._componentMatches[0]].changed = 1;
 		led.set(1,function() {
 			led.get(function(l) {
@@ -17,7 +17,7 @@ describe('setters getters', function() {
 			});
 		});
 		led.set(1, function() {});
-		$$('led').set(0);
+		$$('led*1').set(0);
 	});
 
 	it('should set the change watcher', function() {
@@ -85,7 +85,7 @@ describe('use linked components', function() {
 		});
 
 		runs(function() {
-			$$('humidity').get(function(h) {
+			$$('humidity*1').get(function(h) {
 				humid = h;
 			});
 		});
@@ -108,7 +108,7 @@ describe('on Change events', function() {
 			return changed = true;
 		}
 		runs(function() {
-			var led = $$('led');
+			var led = $$('led*1');
 			led.on('change', watch);
 			led.set(1, watch);
 		});

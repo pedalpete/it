@@ -26,14 +26,13 @@ describe('get device parsed query' , function() {
 	it('should show how the query was parsed', function() {
 		expect($$('led').parsedQuery.type).toBe('led');
 		expect($$('led.blue,red').parsedQuery.class[0]).toBe('blue');
-		expect($$('leds').parsedQuery.plural).toBe(true);
 		expect($$('led*3').parsedQuery.count).toBe(3);
 	});
 });
 
 describe('add component specfic methods', function() {
 	it('should have a test method', function() {
-		var leds = $$('leds');
+		var leds = $$('led');
 		expect(_fvr[leds._componentMatches[2]].get).toBeDefined();
 	});
 });
