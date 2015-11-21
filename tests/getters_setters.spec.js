@@ -104,20 +104,21 @@ describe('on Change events', function() {
 	it('should be triggered on set events', function() {
 		var changed = false;
 
-		function watch() {
+		function watchEvt() {
 			return changed = true;
 		}
 		runs(function() {
-			var led = $$('led*1');
-			led.on('change', watch);
-			led.set(1, watch);
+			var led = $$('led#rgb');
+			led.on('change', watchEvt);
+			led.set({red: 1, green: 2, blue: 3}, function() {
+			});
 		});
 
 		waitsFor(function() {
 			return changed;
 		},2000);
 
-		runs(function() {
+		runs(function() {  
 			expect(changed).toBe(true);
 		});
 	});

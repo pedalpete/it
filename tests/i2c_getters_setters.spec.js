@@ -141,7 +141,7 @@ describe('working with i2c', function() {
 		}
 
 		runs(function() {
-			$$('accelerometer#test_wait').on('data', watchEvt);
+			$$('accelerometer#test_wait').on('change', watchEvt);
 		});
 
 		waitsFor(function() {
@@ -149,6 +149,7 @@ describe('working with i2c', function() {
 		},3000);
 
 		runs(function() {
+			console.log('test waiting');
 			expect(watchEvents.length).toBeGreaterThan(4);
 		});
 	});
@@ -168,7 +169,7 @@ describe('working with i2c', function() {
 		}
 
 		runs(function() {
-			$$('accelerometer#init_stream').on('data', watch);
+			$$('accelerometer#init_stream').on('change', watch);
 		});
 
 		waitsFor(function() {
@@ -179,5 +180,4 @@ describe('working with i2c', function() {
 			expect(watchEvents.length).toBeGreaterThan(5);
 		});
 	});
-
 });

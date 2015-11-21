@@ -17,7 +17,8 @@ var mockPiPins = {
 		}
 		return this.pin;
 	},
-	on: function(dirfn) {
+	on: function(dir, fn) {
+
 		thisOnChange = fn;
 	},
 	pin: {}
