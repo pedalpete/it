@@ -149,7 +149,6 @@ describe('working with i2c', function() {
 		},3000);
 
 		runs(function() {
-			console.log('test waiting');
 			expect(watchEvents.length).toBeGreaterThan(4);
 		});
 	});
