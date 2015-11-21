@@ -11,7 +11,7 @@
     "favor.it"
   ],
   "scripts": {
-    "test": "envade DEVICE_MOCK_PATH=../../tests/mocks/ -- jasmine-node tests/spi_getters_setters.spec.js --autotest --watch"
+    "test": "envade DEVICE_MOCK_PATH=../../tests/mocks/ -- jasmine-node tests --autotest --watch"
   },
   "dependencies": {
     "async": "^1.4.2",
