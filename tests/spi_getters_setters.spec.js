@@ -57,7 +57,7 @@ describe('spi', function() {
 		}
 
 		runs(function() {
-			$$('temperature#spi').on('data', getData);
+			$$('temperature#spi').on('change', getData);
 		});
 
 		waitsFor(function() {
@@ -65,9 +65,9 @@ describe('spi', function() {
 		},1000);
 
 		runs(function() {
-			expect(_fvr[device._index]._spi.opened).toBeGreaterThan(6);
-			expect(_fvr[device._index]._spi.transferred).toBeGreaterThan(6);
-			expect(_fvr[device._index]._spi.closed).toBeGreaterThan(6);
+			expect(device._component._spi.opened).toBeGreaterThan(4);
+			expect(device._component._spi.transferred).toBeGreaterThan(4);
+			expect(device._component._spi.closed).toBeGreaterThan(4);
 		});
 	});
 });
