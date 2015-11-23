@@ -118,7 +118,7 @@ describe('on Change events', function() {
 			return changed;
 		},2000);
 
-		runs(function() {  
+		runs(function() {
 			expect(changed).toBe(true);
 		});
 	});
