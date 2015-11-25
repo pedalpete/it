@@ -70,4 +70,22 @@ describe('spi', function() {
 			expect(device._component._spi.closed).toBeGreaterThan(4);
 		});
 	});
+
+	it('should format output', function() {
+		var output;
+
+		runs(function() {
+			$$('accelerometer#formatOutputSpi').get(function(data) {
+				output = data;
+			});
+		});
+
+		waitsFor(function() {
+			return output;
+		}, 1000);
+
+		runs(function() {
+			expect(output).toBe('postFormat returned');
+		});
+	});
 });
