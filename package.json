@@ -16,7 +16,6 @@
   "dependencies": {
     "async": "^1.4.2",
     "i2c": "*",
-    "pi-pins": "*",
     "spi": "*"
   },
   "devDependencies": {

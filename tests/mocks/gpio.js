@@ -1,24 +1,18 @@
 var thisOnChange;
-var testValue = 0;
 var mockPiPins = {
-	mode: function(dir) {
-		this.pin.direction = dir;
-		return this.pin;
+	read: function(cb) {
+		cb.call(this, null, this.pin.value || 0);	
 	},
-	value: function(val) {
-		if (val === undefined) {
-			return this.pin.value || false;
-		}
+	write: function(val, cb) {
 		this.pin.value = val;
 
 		//trigger 'on so we can test it'
 		if (thisOnChange) {
 			thisOnChange.call();
 		}
-		return this.pin;
+		return cb.call(this, null, this.pin.value);
 	},
 	on: function(dir, fn) {
-
 		thisOnChange = fn;
 	},
 	pin: {}

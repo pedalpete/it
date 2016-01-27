@@ -2,9 +2,9 @@ var $$ =  require('../lib/favor_obj_builder.js')('../tests/mocks/favorit');
 
 describe('setters getters', function() {
 	it('should initialize and get the values for the led', function() {
-		var led = $$('led');
-		led.get(function(l) {
-			expect(l).toBe(false);
+		var led = $$('led*1');
+		led.get(function(val) {
+			expect(val).toBe(0);
 		});
 	});
 
@@ -12,8 +12,8 @@ describe('setters getters', function() {
 		var led = $$('led*1');
 		_fvr[led._componentMatches[0]].changed = 1;
 		led.set(1,function() {
-			led.get(function(l) {
-				expect(l).toBe(true);
+			led.get(function(err, val) {
+				expect(err, val).toBe(1);
 			});
 		});
 		led.set(1, function() {});
