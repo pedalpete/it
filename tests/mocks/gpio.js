@@ -1,5 +1,6 @@
 var thisOnChange;
 var mockPiPins = {
+	onChange: null,
 	read: function(cb) {
 		cb.call(this, null, this.pin.value || 0);	
 	},
@@ -7,13 +8,13 @@ var mockPiPins = {
 		this.pin.value = val;
 
 		//trigger 'on so we can test it'
-		if (thisOnChange) {
-			thisOnChange.call();
+		if (this.onChange) {
+			this.onChange.call(null, this.pin.value);
 		}
 		return cb.call(this, null, this.pin.value);
 	},
-	on: function(dir, fn) {
-		thisOnChange = fn;
+	watch: function(cb) {
+		this.onChange = cb;
 	},
 	pin: {}
 };
