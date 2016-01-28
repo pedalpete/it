@@ -2,7 +2,7 @@
   "author": "PedalPete",
   "name": "IT",
   "description": "jquery like library for interacting with IoT devices",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "main": "./lib/it.js",
   "keywords": [
     "IoT",
