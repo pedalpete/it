@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "async": "^1.4.2",
-    "i2c": "0.2.1",
+    "i2c": "https://github.com/polaris/node-i2c",
     "spi": "0.2.0",
 	"onoff": "1.0.3"
   },
