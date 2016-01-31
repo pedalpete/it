@@ -8,22 +8,18 @@ function returnObj(cmds) {
 		inputs: cmds.toString()
 	};
 }
+var openSync = function(address) {
+	var i2c = new mockObj(address);
+	return i2c;
+}
+var writeByte = function(addr, cmd, cb) {
+	increment.call(this,'writeByte',[addr, cmd]);
+	cb.call(this, null, returnObj.call(this,[addr, cmd]));
+};
 
-var writeByte =  function(byte, cb) {
-	increment.call(this,'writeByte', byte);
-	cb.call(this, null, returnObj.call(this, byte));
-};
-var writeBytes = function(command, bytes, cb) {
-	increment.call(this,'writeBytes',[command, bytes]);
-	cb.call(this, null, returnObj.call(this,[command, bytes]));
-};
-var readByte = function(byte, cb) {
-	increment.call(this,'readByte', byte);
-	cb.call(this, null, returnObj.call(this, byte));
-};
-var readBytes = function(command, bytes, cb) {
-	increment.call(this,'readBytes', [command, bytes]);
-	cb.call(this, null, returnObj.call(this,[command, bytes]));
+var readByte = function(addr, cmd, cb) {
+	increment.call(this,'readByte', [addr, cmd]);
+	cb.call(this, null, returnObj.call(this,[addr, cmd]));
 };
 var on = function(data) {
 	var res;
@@ -42,21 +38,26 @@ var stream = function(command, length, delay) {
 	Stream.start();
 };
 
-var mockI2c = function(address, path) {
+var close = function() {
+	this.isOpen = false;
+}
+var mockObj = function(address) {
 	return {
+		address: address,
 		writeByte: writeByte,
-		writeBytes: writeBytes,
 		readByte: readByte,
-		readBytes: readBytes,
 		on: on,
+		close: close,
 		stream: stream,
 		counts: {
 			writeByte: [],
-			writeBytes: [],
-			readByte: [],
-			readBytes: []
+			readByte: []
 		}
-	};
+	}
 };
 
-module.exports =  mockI2c;
+var I2C = {
+	openSync: openSync
+}
+
+module.exports = I2C;

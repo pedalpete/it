@@ -3,6 +3,11 @@
 
 favorit is a javascript/node.js library to abstract away complex and inconsistent hardware interfaces into a single simple to use API.
 
+# Note: Node v.4 Support and current state - project still in development
+Due to the huge breaking changes moving to node v.4, support for versions less than node v.4 are being removed and 
+Favor-it is being re-written. The Api 'should' remain the same, as I'm trying to obfuscate the complexity of 
+hardware interactions. I appreciate your patience as I work through this process.
+
 ## What's supported?
 Currently favorit has been tested on RaspberryPi v1b and Beaglebone Black, 
 but any linux device which runs node should work. I'll be happy to test with other devices,
@@ -194,11 +199,11 @@ The array holds a series of objects, each object representing a single command w
 
 Each i2c command is made up of the following
 
-##### cmd (string) 'write' | 'read' required
+##### type (string) 'write' | 'read' required
 Quite simply this states weather the current command is a write or read command.
-##### byte (hex) required
+##### addr (hex) required
 This is the address the command needs to be written to.
-##### bytes (array of hex) optional
+##### cmd (array of hex) optional
 This is an array of hex values which will be written to the address
 ##### wait (number milliseconds) optional
 Some i2c components require a time period to be passed before the next command
@@ -208,12 +213,12 @@ time has been waited.
 
 An example of an i2c component is 
 ```
-{type: 'accelerometer', address: 0x11, interface: 'i2c',
+{type: 'accelerometer', address: 1, interface: 'i2c',
 	init: [
-		{cmd: 'write', byte: 0x2D, bytes: [1 << 3]},
-		{cmd: 'write', byte: 0x31,bytes: [0x09]},
-		{cmd: 'write', byte: 0x2c, bytes: [8 + 2 + 1]}, wait: 300],
-	get: {cmd: 'read', byte: 0x33, bytes: 6}
+		{type: 'write', addr: 0x2D, cmd: [1 << 3]},
+		{type: 'write', addr: 0x31, cmd: [0x09]},
+		{type: 'write', addr: 0x2c, cmd: [8 + 2 + 1]}, wait: 300],
+	get: {type: 'read', addr: 0x33, cmd: 6}
 }
 ```
 

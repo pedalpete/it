@@ -17,10 +17,10 @@ describe('working with i2c', function() {
 
 		runs(function() {
 			expect(acc).toBe('51,6');
-			expect(mocki2c.writeBytes.length).toBe(3);
-			expect(mocki2c.writeBytes[0]).toBe('45,8');
-			expect(mocki2c.writeBytes[2]).toBe('44,11');
-			expect(mocki2c.readBytes[0]).toBe('51,6');
+			expect(mocki2c.writeByte.length).toBe(3);
+			expect(mocki2c.writeByte[0]).toBe('45,8');
+			expect(mocki2c.writeByte[2]).toBe('44,11');
+			expect(mocki2c.readByte[0]).toBe('51,6');
 		});
 	});
 
@@ -43,8 +43,8 @@ describe('working with i2c', function() {
 			var end = new Date();
 			expect(end.valueOf() - start.valueOf()).toBeGreaterThan(1000);
 			expect(acc).toBe('51,6');
-			expect(mocki2c.writeBytes.length).toBe(3);
-			expect(mocki2c.readBytes[0]).toBe('51,6');
+			expect(mocki2c.writeByte.length).toBe(3);
+			expect(mocki2c.readByte[0]).toBe('51,6');
 		});
 	});
 
@@ -62,8 +62,9 @@ describe('working with i2c', function() {
 		},1000);
 
 		runs(function() {
-			expect(mocki2c.writeBytes.length).toBe(1);
-			expect(mocki2c.writeBytes[0]).toBe('110,0,0,0');
+			expect(mocki2c.writeByte.length).toBe(2); //gets initialized first
+			expect(mocki2c.writeByte[0]).toBe('109,0,0,0');
+			expect(mocki2c.writeByte[1]).toBe('110,0,0,0');
 		});
 	});
 
@@ -82,8 +83,8 @@ describe('working with i2c', function() {
 		},1000);
 
 		runs(function() {
-			expect(mocki2c.writeBytes.length).toBe(1);
-			expect(mocki2c.writeBytes[0]).toBe('110,1,2,3');
+			expect(mocki2c.writeByte.length).toBe(1);
+			expect(mocki2c.writeByte[0]).toBe('110,1,2,3');
 		});
 	});
 
@@ -100,8 +101,8 @@ describe('working with i2c', function() {
 		},1000);
 
 		runs(function() {
-			expect(mocki2c.writeBytes.length).toBe(2);
-			expect(mocki2c.writeBytes[1]).toBe('110,2,2,2');
+			expect(mocki2c.writeByte.length).toBe(3);
+			expect(mocki2c.writeByte[2]).toBe('110,2,2,2');
 		});
 	});
 
