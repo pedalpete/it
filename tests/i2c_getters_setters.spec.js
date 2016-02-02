@@ -1,4 +1,6 @@
-var $$ =  require('../lib/favor_obj_builder.js')('../tests/mocks/favorit');
+var favoritjs = require('./mocks/favorit');
+var $$ =  require('../index.js')(favoritjs);
+
 describe('working with i2c', function() {
 	it('should get i2c', function() {
 		var acc = false;

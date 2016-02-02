@@ -1,4 +1,5 @@
-var $$ =  require('../lib/favor_obj_builder.js')('../tests/mocks/favorit');
+var favoritjs = require('./mocks/favorit');
+var $$ =  require('../index.js')(favoritjs);
 
 describe('components', function() {
 

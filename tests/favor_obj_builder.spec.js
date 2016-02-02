@@ -1,13 +1,8 @@
 var fs = require('fs-extra');
 var gpioPath = 'tests/gpio-test/class/gpio';
-//setup the filesystem with the exports path
-fs.outputFileSync(gpioPath + '/export','none');
-for (var i = 0 ; i <= 6; i++) {
-	fs.outputFileSync(gpioPath + i + '/value', 2,'utf-8');
-	fs.outputFileSync(gpioPath + i + '/direction','none','utf-8');
-}
+var favoritjs = require('./mocks/favorit');
+var $$ =  require('../index.js')(favoritjs);
 
-var $$ = require('../lib/favor_obj_builder.js')('../tests/mocks/favorit');
 
 describe('device build', function() {
 	it('should describe the structure of the device', function() {

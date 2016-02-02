@@ -1,4 +1,5 @@
-var $$ =  require('../lib/favor_obj_builder.js')('../tests/mocks/favorit');
+var favoritjs = require('./mocks/favorit');
+var $$ =  require('../index.js')(favoritjs);
 
 describe('setters getters', function() {
 	it('should initialize and get the values for the led', function() {

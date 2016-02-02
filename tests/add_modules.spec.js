@@ -1,4 +1,5 @@
-var $$ =  require('../index.js')('../tests/mocks/favorit');
+var favoritjs = require('./mocks/favorit');
+var $$ =  require('../index.js')(favoritjs);
 
 describe('setting the device object prototype methods', function() {
 	it('should add the get and set methods', function() {
