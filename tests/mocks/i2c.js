@@ -17,9 +17,9 @@ var writeByte = function(address, addr, cmd, cb) {
 	cb.call(this, null, returnObj.call(this,[addr, cmd]));
 };
 
-var readByte = function(address, addr, cmd, cb) {
-	increment.call(this,'readByte', [address, addr, cmd]);
-	cb.call(this, null, returnObj.call(this,[addr, cmd]));
+var readByte = function(address, addr, cb) {
+	increment.call(this,'readByte', [address, addr]);
+	cb.call(this, null, returnObj.call(this,[addr]));
 };
 var on = function(data) {
 	var res;
