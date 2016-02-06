@@ -19,11 +19,10 @@ describe('spi', function() {
 		runs(function() {
 			expect(getSpi.length).toBe(6);
 			expect(_fvr[device._index].initialized).toBeTruthy();
-			expect(_fvr[device._index]._spi.opened).toBe(1);
 		});
 	});
 
-	it('should open and close device on each request', function() {
+	it('should transfer without initializing again', function() {
 		var getSpi = false;
 		var device;
 		runs(function() {
@@ -39,9 +38,7 @@ describe('spi', function() {
 
 		runs(function() {
 			expect(getSpi.length).toBe(6);
-			expect(_fvr[device._index]._spi.opened).toBe(2);
 			expect(_fvr[device._index]._spi.transferred).toBe(2);
-			expect(_fvr[device._index]._spi.closed).toBe(2);
 		});
 	});
 
@@ -63,12 +60,11 @@ describe('spi', function() {
 
 		waitsFor(function() {
 			return getSpi;
+			$$('temperature#spi').removeListener('change', getData);
 		},1000);
 
 		runs(function() {
-			expect(device._component._spi.opened).toBeGreaterThan(4);
 			expect(device._component._spi.transferred).toBeGreaterThan(4);
-			expect(device._component._spi.closed).toBeGreaterThan(4);
 		});
 	});
 

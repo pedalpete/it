@@ -15,9 +15,9 @@
   },
   "dependencies": {
     "async": "^1.4.2",
-    "spi": "0.2.0",
     "onoff": "1.0.3",
-	"i2c-bus": "1.0.2"
+    "i2c-bus": "1.0.2",
+	"pi-spi": "1.0.1"
   },
   "devDependencies": {
     "envade": "^1.0.3",
