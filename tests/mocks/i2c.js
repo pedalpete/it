@@ -12,13 +12,13 @@ var openSync = function(address) {
 	var i2c = new mockObj(address);
 	return i2c;
 }
-var writeByte = function(addr, cmd, cb) {
-	increment.call(this,'writeByte',[addr, cmd]);
+var writeByte = function(address, addr, cmd, cb) {
+	increment.call(this,'writeByte',[address, addr, cmd]);
 	cb.call(this, null, returnObj.call(this,[addr, cmd]));
 };
 
-var readByte = function(addr, cmd, cb) {
-	increment.call(this,'readByte', [addr, cmd]);
+var readByte = function(address, addr, cmd, cb) {
+	increment.call(this,'readByte', [address, addr, cmd]);
 	cb.call(this, null, returnObj.call(this,[addr, cmd]));
 };
 var on = function(data) {

@@ -27,29 +27,29 @@ module.exports = {
 			{get: require('./linked_temp_humidity_mock')}],
 			structure: {'temperature': {'address': 9}, humidity: {address: 10}},
 			interface: 'gpio'},
-		{type: 'accelerometer', name: 'bridge', address: 1, init: [
+		{type: 'accelerometer', path: 6, name: 'bridge', address: 1, init: [
 			{type: 'write', addr: 0x2D, cmd: [1 << 3]},
 			{type: 'write', addr: 0x31, cmd: [0x09]},
             {type: 'write', addr: 0x2c, cmd: [8 + 2 + 1]}
 		], get: {type: 'read', addr: 0x33, cmd: 6}, interface: 'i2c'},
-		{type: 'accelerometer', name: 'test_wait', address: 0x1d, init: [
+		{type: 'accelerometer', path: 5, name: 'test_wait', address: 0x1d, init: [
 			{type: 'write', addr: 0x2D, cmd: [1 << 3]},
 			{type: 'write', addr: 0x31, cmd: [0x09], wait: 500},
 			{type: 'write', addr: 0x2c, cmd: [8 + 2 + 1], wait: 500}],
 			get: {type: 'read', addr: 0x33, cmd: 6}, interface: 'i2c'},
-		{type: 'accelerometer', name: 'init_stream', address: 0x1d, init: [
+		{type: 'accelerometer', path: 4, name: 'init_stream', address: 0x1d, init: [
 			{type: 'write',addr: 0x2D, cmd: [1 << 3]},
 			{type: 'write',addr: 0x31, cmd: [0x09], wait: 500},
 			{type: 'write',addr: 0x2c, cmd: [8 + 2 + 1], wait: 500}],
 			get: {type: 'read', addr: 0x33, cmd: 6}, interface: 'i2c'},
-		{type: 'led', name: 'blinkm', address: 0x09,
+		{type: 'led', path: 2, name: 'blinkm', address: 0x09,
 			init: {type: 'write', addr: 0x6d},
 			set: {type: 'write', addr: 0x6E, cmd: true}, interface: 'i2c'},
-		{type: 'led', address: 0x05, name: 'blinkm_with_func',
+		{type: 'led', path: 1, address: 0x05, name: 'blinkm_with_func',
 			set: {type: 'write', addr: 0x6E, cmd: function(val) {
 				return [val.r, val.g, val.b];
 			}}, interface: 'i2c'},
-		{type: 'accelerometer', name: 'formatOutput', address: 0x11, init: [
+		{type: 'accelerometer', name: 'formatOutput', path: 0, address: 0x11, init: [
 			{type: 'write', addr: 0x2D, cmd: [1 << 3]},
 			{type: 'write', addr: 0x31,cmd: [0x09]},
 			{type: 'write', addr: 0x2c, cmd: [8 + 2 + 1]}],
