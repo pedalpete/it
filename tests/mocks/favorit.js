@@ -31,12 +31,12 @@ module.exports = {
 			{type: 'write', addr: 0x2D, cmd: [1 << 3]},
 			{type: 'write', addr: 0x31, cmd: [0x09]},
             {type: 'write', addr: 0x2c, cmd: [8 + 2 + 1]}
-		], get: {type: 'read', addr: 0x33, cmd: 6}, interface: 'i2c'},
+		], get: {type: 'read', addr: 0x33}, interface: 'i2c'},
 		{type: 'accelerometer', path: 5, name: 'test_wait', address: 0x1d, init: [
 			{type: 'write', addr: 0x2D, cmd: [1 << 3]},
 			{type: 'write', addr: 0x31, cmd: [0x09], wait: 500},
 			{type: 'write', addr: 0x2c, cmd: [8 + 2 + 1], wait: 500}],
-			get: {type: 'read', addr: 0x33, cmd: 6}, interface: 'i2c'},
+			get: {type: 'read', addr: 0x33}, interface: 'i2c'},
 		{type: 'accelerometer', path: 4, name: 'init_stream', address: 0x1d, init: [
 			{type: 'write',addr: 0x2D, cmd: [1 << 3]},
 			{type: 'write',addr: 0x31, cmd: [0x09], wait: 500},
