@@ -19,6 +19,6 @@ var mockPiPins = {
 	pin: {}
 };
 
-module.exports.connect = function() {
+module.exports = function() {
 	return mockPiPins;
 };
