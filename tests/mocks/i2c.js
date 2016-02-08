@@ -10,6 +10,7 @@ function returnObj(cmds) {
 }
 var openSync = function(address) {
 	var i2c = new mockObj(address);
+	increment.call(i2c, 'open', 1);
 	return i2c;
 }
 var writeByte = function(address, addr, cmd, cb) {
@@ -40,6 +41,7 @@ var stream = function(command, length, delay) {
 
 var close = function() {
 	this.isOpen = false;
+	increment.call(this, 'close', 1);
 }
 var mockObj = function(address) {
 	return {
@@ -51,7 +53,9 @@ var mockObj = function(address) {
 		stream: stream,
 		counts: {
 			writeByte: [],
-			readByte: []
+			readByte: [],
+			open: [],
+			close: []
 		}
 	}
 };
