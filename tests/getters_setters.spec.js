@@ -180,25 +180,6 @@ describe('formatOutput', function() {
 			expect(x).toBe('postFormat returned');
 		});
 	});
-
-	it('should run a formatOutput function before returning on i2c', function() {
-		var changed = false;
-		var x;
-		runs(function() {
-			$$('accelerometer#formatOutput').get(function(val) {
-				x = val;
-				changed = true;
-			});
-		});
-
-		waitsFor(function() {
-			return changed;
-		}, 1000);
-
-		runs(function() {
-			expect(x).toBe('postFormat returned');
-		});
-	});
 });
 
 describe('format input', function() {

@@ -39,9 +39,12 @@ var stream = function(command, length, delay) {
 	Stream.start();
 };
 
-var close = function() {
-	this.isOpen = false;
-	increment.call(this, 'close', 1);
+var reset = function() {
+	return this.count = {
+		writeByte: [],
+		readByte: [],
+		open: []
+	}
 }
 var mockObj = function(address) {
 	return {
@@ -49,14 +52,13 @@ var mockObj = function(address) {
 		writeByte: writeByte,
 		readByte: readByte,
 		on: on,
-		close: close,
 		stream: stream,
 		counts: {
 			writeByte: [],
 			readByte: [],
-			open: [],
-			close: []
-		}
+			open: []
+		},
+		reset: reset
 	}
 };
 
