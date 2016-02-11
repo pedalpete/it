@@ -13,9 +13,9 @@ var openSync = function(address) {
 	increment.call(i2c, 'open', 1);
 	return i2c;
 }
-var write = function(address, length, cmd, cb) {
+var i2cwrite = function(address, length, cmd, cb) {
 	var val = cmd.toString();
-	increment.call(this,'write',[address, val]);
+	increment.call(this,'i2cwrite',[address, val]);
 	cb.call(this, null, returnObj.call(this,[address, val]));
 };
 
@@ -42,7 +42,7 @@ var stream = function(command, length, delay) {
 
 var reset = function() {
 	return this.count = {
-		writeByte: [],
+		i2cwriteByte: [],
 		readByte: [],
 		open: []
 	}
@@ -50,12 +50,12 @@ var reset = function() {
 var mockObj = function(address) {
 	return {
 		address: address,
-		write: write,
+		i2cwrite: i2cwrite,
 		readByte: readByte,
 		on: on,
 		stream: stream,
 		counts: {
-			write: [],
+			i2cwrite: [],
 			readByte: [],
 			open: []
 		},
