@@ -46,7 +46,7 @@ module.exports = {
 			init: {type: 'write', addr: 0x6d},
 			set: {type: 'write', addr: 0x6E, cmd: true}, interface: 'i2c'},
 		{type: 'led', path: 1, address: 0x05, name: 'blinkm_with_func',
-			set: {type: 'write', addr: 0x6E, cmd: function(val) {
+			set: {type: 'write', addr: 0x6E, cmd: true, formatInput: function(val) {
 				return [val.r, val.g, val.b];
 			}}, interface: 'i2c'},
 		{type: 'accelerometer', name: 'formatOutput', path: 0, address: 0x11, init: [
