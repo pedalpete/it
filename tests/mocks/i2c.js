@@ -13,15 +13,16 @@ var openSync = function(address) {
 	increment.call(i2c, 'open', 1);
 	return i2c;
 }
-var i2cwrite = function(address, length, cmd, cb) {
-	var val = cmd.toString();
-	increment.call(this,'i2cwrite',[address, val]);
+var writeI2cBlock = function(address, cmd, length, val, cb) {
+	val = val.toString();
+	increment.call(this,'writeI2cBlock',[address, val]);
 	cb.call(this, null, returnObj.call(this,[address, val]));
 };
 
-var readByte = function(address, addr, cb) {
-	increment.call(this,'readByte', [address, addr]);
-	cb.call(this, null, returnObj.call(this,[addr]));
+var readI2cBlock = function(address, cmd, length, val, cb) {
+	val = val.toString();
+	increment.call(this,'readI2cBlock', [address, cmd]);
+	cb.call(this, null, returnObj.call(this,[cmd]));
 };
 var on = function(data) {
 	var res;
@@ -42,21 +43,21 @@ var stream = function(command, length, delay) {
 
 var reset = function() {
 	return this.count = {
-		i2cwriteByte: [],
-		readByte: [],
+		writeI2cBlockByte: [],
+		readI2cBlock: [],
 		open: []
 	}
 }
 var mockObj = function(address) {
 	return {
 		address: address,
-		i2cwrite: i2cwrite,
-		readByte: readByte,
+		writeI2cBlock: writeI2cBlock,
+		readI2cBlock: readI2cBlock,
 		on: on,
 		stream: stream,
 		counts: {
-			i2cwrite: [],
-			readByte: [],
+			writeI2cBlock: [],
+			readI2cBlock: [],
 			open: []
 		},
 		reset: reset
