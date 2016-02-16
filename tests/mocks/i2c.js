@@ -2,10 +2,9 @@ function increment(cmd, evt) {
 	this.counts[cmd].push(evt.toString());
 }
 
-function returnObj(cmds) {
+function returnObj() {
 	return {
 		counts: this.counts,
-		inputs: cmds.toString()
 	};
 }
 var openSync = function(address) {
@@ -14,15 +13,13 @@ var openSync = function(address) {
 	return i2c;
 }
 var writeI2cBlock = function(address, cmd, length, val, cb) {
-	val = val.toString();
-	increment.call(this,'writeI2cBlock',[address, val]);
-	cb.call(this, null, returnObj.call(this,[address, val]));
+	increment.call(this,'writeI2cBlock',[address, Buffer.isBuffer(val)]);
+	cb.call(this, null, length, returnObj.call(this));
 };
 
 var readI2cBlock = function(address, cmd, length, val, cb) {
-	val = val.toString();
-	increment.call(this,'readI2cBlock', [address, cmd]);
-	cb.call(this, null, returnObj.call(this,[cmd]));
+	increment.call(this,'readI2cBlock', [address, Buffer.isBuffer(val)]);
+	cb.call(this, null, length, returnObj.call(this));
 };
 var on = function(data) {
 	var res;
@@ -43,7 +40,7 @@ var stream = function(command, length, delay) {
 
 var reset = function() {
 	return this.count = {
-		writeI2cBlockByte: [],
+		writeI2cBlock: [],
 		readI2cBlock: [],
 		open: []
 	}
