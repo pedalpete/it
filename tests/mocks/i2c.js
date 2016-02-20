@@ -13,12 +13,12 @@ var openSync = function(address) {
 	return i2c;
 }
 var writeI2cBlock = function(address, cmd, length, val, cb) {
-	increment.call(this,'writeI2cBlock',[address, Buffer.isBuffer(val)]);
+	increment.call(this,'writeI2cBlock',[address, cmd, Buffer.isBuffer(val)]);
 	cb.call(this, null, length, returnObj.call(this));
 };
 
 var readI2cBlock = function(address, cmd, length, val, cb) {
-	increment.call(this,'readI2cBlock', [address, Buffer.isBuffer(val)]);
+	increment.call(this,'readI2cBlock', [address, cmd, Buffer.isBuffer(val)]);
 	cb.call(this, null, length, returnObj.call(this));
 };
 var on = function(data) {

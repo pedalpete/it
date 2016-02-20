@@ -18,9 +18,9 @@ describe('working with i2c', function() {
 
 		runs(function() {
 			expect(mocki2c.writeI2cBlock.length).toBe(3);
-			expect(mocki2c.writeI2cBlock[0]).toBe('45,true');
-			expect(mocki2c.writeI2cBlock[2]).toBe('44,true');
-			expect(mocki2c.readI2cBlock[0]).toBe('51,true');
+			expect(mocki2c.writeI2cBlock[0]).toBe('1,45,true');
+			expect(mocki2c.writeI2cBlock[2]).toBe('1,44,true');
+			expect(mocki2c.readI2cBlock[0]).toBe('1,51,true');
 		});
 	});
 
@@ -60,7 +60,7 @@ describe('working with i2c', function() {
 			var end = new Date();
 			expect(end.valueOf() - start.valueOf()).toBeGreaterThan(1000);
 			expect(mocki2c.writeI2cBlock.length).toBe(9);
-			expect(mocki2c.readI2cBlock[2]).toBe('51,true');
+			expect(mocki2c.readI2cBlock[2]).toBe('29,51,true');
 		});
 	});
 
@@ -79,8 +79,8 @@ describe('working with i2c', function() {
 
 		runs(function() {
 			expect(mocki2c.writeI2cBlock.length).toBe(11); //gets initialized first
-			expect(mocki2c.writeI2cBlock[9]).toBe('109,true');
-			expect(mocki2c.writeI2cBlock[10]).toBe('110,true');
+			expect(mocki2c.writeI2cBlock[9]).toBe('9,109,true');
+			expect(mocki2c.writeI2cBlock[10]).toBe('9,110,true');
 		});
 	});
 
@@ -100,7 +100,7 @@ describe('working with i2c', function() {
 
 		runs(function() {
 			expect(mocki2c.writeI2cBlock.length).toBe(12);
-			expect(mocki2c.writeI2cBlock[11]).toBe('110,true');
+			expect(mocki2c.writeI2cBlock[11]).toBe('5,110,true');
 		});
 	});
 
@@ -118,7 +118,7 @@ describe('working with i2c', function() {
 
 		runs(function() {
 			expect(mocki2c.writeI2cBlock.length).toBe(13);
-			expect(mocki2c.writeI2cBlock[12]).toBe('110,true');
+			expect(mocki2c.writeI2cBlock[12]).toBe('9,110,true');
 		});
 	});
 
