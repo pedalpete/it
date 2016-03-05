@@ -5,7 +5,7 @@ describe('components', function() {
 
 	it('should match multiple components', function() {
 		var leds = $$('led');
-		expect(leds._componentMatches.length).toBe(6);
+		expect(leds._componentMatches.length).toBe(7);
 		expect(_fvr[leds._componentMatches[0]].address).toBe(1);
 		expect(_fvr[leds._componentMatches[1]].address).toBe(2);
 	});
@@ -17,7 +17,6 @@ describe('components', function() {
 
 	it('should get the led by name', function() {
 		var led = $$('led#rgb');
-		//  console.log('#rgb', led._componentMatches, led.parsedQuery, _fvr[3]);
 		expect(_fvr[led._componentMatches[0]].structure.red.address).toBe(4);
 		expect(_fvr[led._componentMatches[0]].structure.green.address).toBe(5);
 		expect(_fvr[led._componentMatches[0]].structure.blue.address).toBe(6);

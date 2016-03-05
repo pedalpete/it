@@ -63,6 +63,8 @@ module.exports = {
 			get: [0x23, 0x48, 0xAF, 0x19, 0x19, 0x19]},
 		{type: 'accelerometer', name: 'formatOutputSpi', address: 'dev/spidev0.1',
 		mode: 'MODE_0', chipSelect: 'high', 'get': [0x11, 0xf2],
-		formatOutput: postFormat, interface: 'spi'}
+		formatOutput: postFormat, interface: 'spi'},
+		{type: 'led', 'name': 'spiSet', address: '/dev/spidev0.1', init: [0x00, 0x00, 0x00, 0x00],
+		set: [0xff, 0xff, 0xff, 0xff], interface: 'spi'}
 	]
 };
