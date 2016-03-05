@@ -34,13 +34,13 @@ exports.initialize = function (dev) {
     };
     
     
-    function _transfer(txbuf,rxbuf,callback) {
+    function _transfer(txbuf,length,callback) {
         this.spiTransfer = {
 			write: txbuf,
-			read: rxbuf
+			length: length
 		};
-
-		isFunction(callback) && callback(this, rxbuf);
+		var err = null;
+		isFunction(callback) && callback(err, txbuf);
 		return spi.transferred++;
     }
     
