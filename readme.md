@@ -3,17 +3,15 @@
 
 favorit is a javascript/node.js library to abstract away complex and inconsistent hardware interfaces into a single simple to use API.
 
-# Note: Node v.4 Support and current state - project still in development
-Due to the huge breaking changes moving to node v.4, support for versions less than node v.4 are being removed and 
-Favor-it is being re-written. The Api 'should' remain the same, as I'm trying to obfuscate the complexity of 
-hardware interactions. I appreciate your patience as I work through this process.
+### Supported Versions of node
+Favorit has been tested with node v4, it should also work with v5. v0.10 and v0.12 have not been tested and may not work. 
 
 ## What's supported?
 Currently favorit has been tested on RaspberryPi v1b and Beaglebone Black, 
 but any linux device which runs node should work. I'll be happy to test with other devices,
 I just need to get access to them.
  
-favorit works with GPIO, i2C and SPI protocols (SPI has not been tested on hardware as I'm waiting for some SPI chips.
+favorit works with GPIO, i2C and SPI protocols.
 
 ### How Does It Work?
 
