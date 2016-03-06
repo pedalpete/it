@@ -59,13 +59,14 @@ module.exports = {
 			formatOutput: postFormat},
 		{type: 'temperature', name: 'spi', interface: 'spi',
 			address: '/dev/spidev0.0',
-			get: {val:[0x23, 0x48, 0xAF, 0x19, 0x19, 0x19]}},
+			get: {val: [0x23, 0x48, 0xAF, 0x19, 0x19, 0x19]}},
 		{type: 'accelerometer', name: 'formatOutputSpi', address: 'dev/spidev0.1',
-		mode: 'MODE_0', chipSelect: 'high', 'get': {val:[0x11, 0xf2]},
+		mode: 'MODE_0', chipSelect: 'high', 'get': {val: [0x11, 0xf2]},
 		formatOutput: postFormat, interface: 'spi'},
-		{type: 'led', name: 'spiSet', address: '/dev/spidev0.1', init: {val:[0x00, 0x00, 0x00, 0x00]},
+		{type: 'led', name: 'spiSet', address: '/dev/spidev0.1',
+		init: {val: [0x00, 0x00, 0x00, 0x00]},
 		set: {formatInput: function(val) {
-			return val; 
-		}}, interface: 'spi', formatOutput: function(val){ return val.toString()}}
+			return val;
+		}}, interface: 'spi', formatOutput: function(val) { return val.toString();}}
 	]
 };

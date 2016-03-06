@@ -86,22 +86,22 @@ describe('spi', function() {
 			expect(output).toBe('postFormat returned');
 		});
 	});
-	
+
 	it('should format an input value', function() {
 		var output;
-		
+
 		runs(function() {
-			$$('led#spiSet').set("test color", function(data) {
+			$$('led#spiSet').set('test color', function(data) {
 				output = data;
 			});
 		});
-		
+
 		waitsFor(function() {
-			return output
+			return output;
 		}, 1000);
-		
+
 		runs(function() {
 			expect(output).toBe('test color');
 		});
-	})
+	});
 });

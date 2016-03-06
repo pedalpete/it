@@ -1,8 +1,8 @@
 var fs = require('fs-extra');
-var gpioPath = 'tests/gpio-test/class/gpio';
 var favoritjs = require('./mocks/favorit');
 var $$ =  require('../index.js')(favoritjs);
 
+var gpioPath = 'tests/gpio-test/class/gpio';
 
 describe('device build', function() {
 	it('should describe the structure of the device', function() {

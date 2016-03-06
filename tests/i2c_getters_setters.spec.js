@@ -2,7 +2,7 @@ var favoritjs = require('./mocks/favorit');
 var $$ =  require('../index.js')(favoritjs);
 
 describe('working with i2c', function() {
-	
+
 	it('should get i2c', function() {
 		var mocki2c = false;
 		var start = new Date();
@@ -42,7 +42,7 @@ describe('working with i2c', function() {
 			expect(x).toBe('postFormat returned');
 		});
 	});
-	
+
 	it('should wait if a wait value is supplied', function() {
 		var mocki2c;
 		var start = new Date();

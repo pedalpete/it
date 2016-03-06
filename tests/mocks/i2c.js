@@ -8,10 +8,11 @@ function returnObj() {
 	};
 }
 var openSync = function(address) {
-	var i2c = new mockObj(address);
+	var i2c = new MockObj(address);
 	increment.call(i2c, 'open', 1);
 	return i2c;
-}
+};
+
 var writeI2cBlock = function(address, cmd, length, val, cb) {
 	increment.call(this,'writeI2cBlock',[address, cmd, Buffer.isBuffer(val)]);
 	cb.call(this, null, length, returnObj.call(this));
@@ -43,9 +44,10 @@ var reset = function() {
 		writeI2cBlock: [],
 		readI2cBlock: [],
 		open: []
-	}
-}
-var mockObj = function(address) {
+	};
+};
+
+var MockObj = function(address) {
 	return {
 		address: address,
 		writeI2cBlock: writeI2cBlock,
@@ -58,11 +60,11 @@ var mockObj = function(address) {
 			open: []
 		},
 		reset: reset
-	}
+	};
 };
 
 var I2C = {
 	openSync: openSync
-}
+};
 
 module.exports = I2C;
