@@ -51,7 +51,7 @@ module.exports = {
 			}}, interface: 'i2c'},
 		{type: 'accelerometer', name: 'formatOutput', path: 0, address: 0x11, init: [
 			{type: 'write', cmd: 0x2D, val: [1 << 3]},
-			{type: 'write', cmd: 0x31,val: [0x09]},
+			{type: 'write', cmd: 0x31, val: [0x09]},
 			{type: 'write', cmd: 0x2c, val: [8 + 2 + 1]}],
 			get: {type: 'read', cmd: 0x33, val: 6}, interface: 'i2c',
 				formatOutput: postFormat},
@@ -65,7 +65,7 @@ module.exports = {
 		formatOutput: postFormat, interface: 'spi'},
 		{type: 'led', name: 'spiSet', address: '/dev/spidev0.1',
 		init: {val: [0x00, 0x00, 0x00, 0x00]},
-		set: {formatInput: function(val) {
+		set: {val: true, formatInput: function(val) {
 			return val;
 		}}, interface: 'spi', formatOutput: function(val) { return val.toString();}}
 	]

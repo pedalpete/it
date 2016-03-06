@@ -3,12 +3,20 @@
 
 favorit is a javascript/node.js library to abstract away complex and inconsistent hardware interfaces into a single simple to use API.
 
+## In a nutshell
+
+Have you ever wanted to write 
+
+`$$('temperature').get(function(temp) { console.log('The temperature is ', temp) };`
+
+Well, now you can, and run on multiple devices without mixing business logic with device configuration considerations.
+
 ### Supported Versions of node
 Favorit has been tested with node v4, it should also work with v5. v0.10 and v0.12 have not been tested and may not work. 
 
 ## What's supported?
 Currently favorit has been tested on RaspberryPi v1b and Beaglebone Black, 
-but any linux device which runs node should work. I'll be happy to test with other devices,
+but any linux device which runs node.js should work. I'll be happy to test with other devices,
 I just need to get access to them.
  
 favorit works with GPIO, i2C and SPI protocols.
@@ -29,6 +37,15 @@ you can easly write jQuery style statements like `$$('temperature').get(callback
 3) write-once run-anywhere 
 
 4) testable logic which will run across different hardware devices
+
+### Installing
+
+`npm install favor-it`
+
+#### errors installing on windows
+Some included packages do not build on windows. I'll be improving the install process to get around this.
+At the moment, ignore the build errors, you should be able to develop on your local machine fine and push
+your changes to devices.
 
 ### How do we get started?
 
@@ -92,8 +109,8 @@ Describes the hardware interface to the component.
 This is the address of the component. Valid for each protocol are
 ```
 gpio:	number
-i2c:	hex
-spi:	string of spi bus address
+i2c:	hex or number
+spi:	string of spi bus address eg: '/dev/spidev0.0'
 ```
 
 #### component.structure (object)
@@ -190,8 +207,15 @@ There are a few things that need to happen to interact with an i2c component.
 
 Therefore, an i2c component has a few special methods
 
+#### path (number) required
+This is the path address on i2c bus. 
+
+#### address (hex) required
+This is the device address to send commands.
+
 #### init get set (array || object)
-each command sent to the i2c bus is expected to be an array. 
+Eeach command sent to the i2c bus is expected to be an array, if only one command needs to be sent, you
+can provide a single object. 
 
 The array holds a series of objects, each object representing a single command which is either write or read.
 
@@ -199,15 +223,23 @@ Each i2c command is made up of the following
 
 ##### type (string) 'write' | 'read' required
 Quite simply this states weather the current command is a write or read command.
-##### addr (hex) required
-This is the address the command needs to be written to.
-##### cmd (array of hex) optional
-This is an array of hex values which will be written to the address
+
+##### cmd (hex) 
+This is the cmd sent to the device
+
+##### val (hex || array of hex || true) optional
+The values to write to the device.
+Hex and arrays will be put into a buffer and sent to the device.
+
+A value of true will pass an input value run an input value through formatInput if defined.
 ##### wait (number milliseconds) optional
 Some i2c components require a time period to be passed before the next command
 can be written. The `wait` attribute will pause after the current command is 
 written and will continue with the next command in the array after the alloted 
 time has been waited.
+
+##### formatInput (function) optional
+If defined, favorit will run the formatInput function and the output will be written to the device. 
 
 An example of an i2c component is 
 ```
@@ -217,7 +249,12 @@ An example of an i2c component is
 		{type: 'write', addr: 0x31, cmd: [0x09]},
 		{type: 'write', addr: 0x2c, cmd: [8 + 2 + 1]}, wait: 300],
 	get: {type: 'read', addr: 0x33, cmd: 6}
-}
+},
+{type: 'led', path: 2, address: 0x05,
+	set: {type: 'write', cmd: 0x6E, val: true, 
+	formatInput: function(val) {
+		return [val.r, val.g, val.b];
+}}, interface: 'i2c'},
 ```
 
 In this example, the accelerometer is initialized by writing a series of commands, 
@@ -225,11 +262,14 @@ the get method itself is only a single object.
 
 To get the accelometer value you would write `$$('accelerometer').get(callback)`.
 
-### Interacting with SPI
-Note: SPI has had limited testing so far.
+The led, will take a passed in variable, transform it to meet the format required by the device,
+and then set the color on the device. 
 
-Compared to i2c, SPI is much easier to work with, like i2c, an SPI component will 
-initialize itself if it is not already initialized, so you don't need to worry about
+To set the led color to red, you would write `$$('led').set({r:255, g: 0, b: 0}, callback);
+
+### Interacting with SPI
+
+An SPI component will initialize itself if it is not already initialized, so you don't need to worry about
 initializing or component setup.
 
 #### address (string) required
@@ -239,23 +279,19 @@ the location of your component on the spi bus.
 
 If you path is something other than '/dev/spidev0.x', replace it accordingly.
 
-#### mode (string) optional
+#### mode (string) optional - not yet implemented
 
 Sets the clock phase and polarity of the clock signal.
 
 Valid values are 'MODE_0' through 'MODE_3'. The default is 'MODE_0'
 
-#### chipSelect (string) optional - default 'low'
+#### chipSelect (string) optional - default 'low' - not yet implemented
 Sets if the chip should go high or low to select.
 
 Valid values are 'high' or 'low'.
 
-#### get set (array of hex)
-Send a get or set command to the SPI device. This is an array of hex values
-which will be sent to the device. 
-
-Currently full duplex transfer is not yet supported, so only indivitual read/write
-as get/set is available.
+#### get set init(object or array of objects)
+Send a get or set command to the SPI device. 
 
 The get/set array will be converted to a buffer before being sent to the device, 
 so no need to write these as a buffer yourself.
@@ -263,8 +299,8 @@ so no need to write these as a buffer yourself.
 ```
 {type: 'temperature', interface: 'spi',
 			address: '/dev/spidev0.0',
-			mode: 'MODE_0',	chipSelect: 'high',
-			get: [0x23, 0x48, 0xAF, 0x19, 0x19, 0x19]}
+			get: {val: [0x23, 0x48, 0xAF, 0x19, 0x19, 0x19]}
+			}
 ```	
 
 
@@ -273,7 +309,10 @@ so no need to write these as a buffer yourself.
 I hope I've made it really simple to get using favorit.
 Now, include the favorit module in your app. 
 
-`var $$ = require('favorit')(path_to_your_favorit.js)`
+```
+var favorit = require(path_to_your_favorit.js');
+var $$ = require('favorit')()
+```
 
 A good way to set the path to your favorit.js file is as an environment variable,
 which will give you good flexibility on running the same application across
