@@ -1,6 +1,6 @@
 {
   "author": "Pete Field aka. PedalPete",
-  "name": "favor-it",
+  "name": "favor",
   "description": "jquery like library for interacting with IoT devices",
   "version": "0.0.1",
   "main": "./index.js",
@@ -8,7 +8,12 @@
     "IoT",
     "it",
     "favor",
-    "favor.it"
+    "favor.it",
+	"gpio",
+	"spi",
+	"i2c",
+	"raspberrypi",
+	"beaglebone"
   ],
   "scripts": {
     "test": "envade DEVICE_MOCK_PATH=../../tests/mocks/ -- jasmine-node tests --autotest --watch ."

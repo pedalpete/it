@@ -1,7 +1,7 @@
-#favorit
+#Favor
 ## A simple library for interacting with IoT devices.
 
-favorit is a javascript/node.js library to abstract away complex and inconsistent hardware interfaces into a single simple to use API.
+Favor is a javascript/node.js library to abstract away complex and inconsistent hardware interfaces into a single simple to use API.
 
 ## In a nutshell
 
@@ -12,24 +12,24 @@ Have you ever wanted to write
 Well, now you can, and run on multiple devices without mixing business logic with device configuration considerations.
 
 ### Supported Versions of node
-Favorit has been tested with node v4, it should also work with v5. v0.10 and v0.12 have not been tested and may not work. 
+Favor has been tested with node v4, it should also work with v5. v0.10 and v0.12 have not been tested and may not work. 
 
 ## What's supported?
-Currently favorit has been tested on RaspberryPi v1b and Beaglebone Black, 
+Currently Favor has been tested on RaspberryPi v1b and Beaglebone Black, 
 but any linux device which runs node.js should work. I'll be happy to test with other devices,
 I just need to get access to them.
  
-favorit works with GPIO, i2C and SPI protocols.
+Favor works with GPIO, i2C and SPI protocols.
 
 ### How Does It Work?
 
-favorit uses a js file (optionally called `favorit.js`) stored on the device which describes the structure of your hardware.
+Favor uses a js configuration file stored on your device which describes the structure of your hardware.
 It queries this js file, similar to how jQuery parses and interacts with the DOM. 
-Once favorit knows what devices are connected, and how to interact with them, 
+Once Favor knows what devices are connected, and how to interact with them, 
 you can easly write jQuery style statements like `$$('temperature').get(callback)`
- will get you the temperature on any device running favorit which has a temperature sensor. 
+ will get you the temperature on any device running Favor which has a temperature sensor. 
 
-### What are the benefits of favorit 
+### What are the benefits of Favor 
 1) a single consistent api for interacting with different devices and protocols
 
 2) a separation of concerns between hardware and software
@@ -40,7 +40,7 @@ you can easly write jQuery style statements like `$$('temperature').get(callback
 
 ### Installing
 
-`npm install favor-it`
+`npm install Favor-it`
 
 #### errors installing on windows
 Some included packages do not build on windows. I'll be improving the install process to get around this.
@@ -49,11 +49,11 @@ your changes to devices.
 
 ### How do we get started?
 
-First, you'll need to create your favorit.js file. 
+First, you'll need to create your Favor.js file. 
 This file describes your hardware setup. 
 
 
-The favorit.js file exports a single object with the following structure:
+The Favor.js file exports a single object with the following structure:
 #### name (string)
 This is a name for your device. 
 It does not have to be unique, but in the future may be used to identify your device.
@@ -181,8 +181,8 @@ converted to a buffer before being submitted to the component.
 #### component.methods (array of objects)
 component methods allows you to specify special methods available to that component. One very important use for this is when 
 you have a component which doesn't respond to the standard 
-favorit get or set methods. You can provide your own get or set method within this object. 
-When calling get or set, favorit will check to see if your component has it's own get or set method already defined.
+Favor get or set methods. You can provide your own get or set method within this object. 
+When calling get or set, Favor will check to see if your component has it's own get or set method already defined.
 
 An example component method 
 ```
@@ -239,7 +239,7 @@ written and will continue with the next command in the array after the alloted
 time has been waited.
 
 ##### formatInput (function) optional
-If defined, favorit will run the formatInput function and the output will be written to the device. 
+If defined, Favor will run the formatInput function and the output will be written to the device. 
 
 An example of an i2c component is 
 ```
@@ -304,28 +304,28 @@ so no need to write these as a buffer yourself.
 ```	
 
 
-### Running favorit
+### Running Favor
 
-I hope I've made it really simple to get using favorit.
-Now, include the favorit module in your app. 
+I hope I've made it really simple to get using Favor.
+Now, include the Favor module in your app. 
 
 ```
-var favorit = require(path_to_your_favorit.js');
-var $$ = require('favorit')()
+var Favor = require(path_to_your_Favor.js');
+var $$ = require('Favor')()
 ```
 
-A good way to set the path to your favorit.js file is as an environment variable,
+A good way to set the path to your Favor.js file is as an environment variable,
 which will give you good flexibility on running the same application across
 different hardware.
 
 ### Kinda like jQuery
 If you know jQuery (and even if you don't) I hope it won't take you too long to 
-get the hang of using favorit.
+get the hang of using Favor.
 
 #### Query like you know how
 In order to interact with your hardware components, you'll query your device configuration file.
 
-Though Favorit query parser is very similar to javascript DOM query engines you may be used to like jQuery
+Though Favor query parser is very similar to javascript DOM query engines you may be used to like jQuery
 or `document.querySelector`, there are a few differences.
 
 ##### Query by component type
@@ -352,4 +352,4 @@ For components where the set input value may not be consistent across similar co
 important to use the `formatInput` to convert a standardized input into one will work with the component
 you are interacting with.
 
-As Favorit matures, the goal is to settle on a standardized input formats for different types of components.
+As Favor matures, the goal is to settle on a standardized input formats for different types of components.
