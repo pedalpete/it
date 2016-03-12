@@ -13,8 +13,8 @@ describe('setters getters', function() {
 		var led = $$('led*1');
 		_fvr[led._componentMatches[0]].changed = 1;
 		led.set(1,function() {
-			led.get(function(err, val) {
-				expect(err, val).toBe(1);
+			led.get(function(val) {
+				expect(val).toBe(1);
 			});
 		});
 		led.set(1, function() {});
