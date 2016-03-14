@@ -4,21 +4,39 @@ var $$ =  require('../index.js')(favoritjs);
 describe('setters getters', function() {
 	it('should initialize and get the values for the led', function() {
 		var led = $$('led*1');
-		led.get(function(val) {
-			expect(val).toBe(0);
+		var check;
+		runs(function() {
+			led.get(function(val) {
+				check = val + 1;
+			});
+		});
+		
+		waitsFor(function() {
+			return check;
+		}, 1000);
+		// doesn't return on 0, so need to add one.
+		runs(function(){
+			expect(check).toBe(1);
 		});
 	});
 
-	it('should set and then get the value for the led', function() {
+	it('should set the value for the led', function() {
 		var led = $$('led*1');
-		_fvr[led._componentMatches[0]].changed = 1;
-		led.set(1,function() {
-			led.get(function(val) {
-				expect(val).toBe(1);
+		var check;
+		runs(function(){
+			led.set(1, function(val, data) {
+				check = val;
 			});
 		});
-		led.set(1, function() {});
-		$$('led*1').set(0);
+		
+		waitsFor(function(){
+			return check;
+		},1000);
+		
+		runs(function(){
+			expect(check).toBe(1);
+			led.set(0, function() {});
+		})
 	});
 
 	it('should set the change watcher', function() {
@@ -65,6 +83,7 @@ describe('use component defined methods', function() {
 		});
 	});
 });
+
 
 describe('use linked components', function() {
 	it('should get values from linked component', function() {
@@ -160,6 +179,7 @@ describe('watch for data on gpio elements', function() {
 });
 
 */
+
 describe('formatOutput', function() {
 	it('should run a formatOutput before returning on gpio', function() {
 		var changed = false;
