@@ -19,8 +19,10 @@
     "test": "envade DEVICE_MOCK_PATH=../../tests/mocks/ -- jasmine-node tests --autotest --watch ."
   },
   "dependencies": {
-    "async": "^1.4.2",
-    "onoff": "1.0.3",
+    "async": "^1.4.2"
+  },
+  "optionalDependencies" : {
+	"onoff": "1.0.3",
     "i2c-bus": "1.0.2",
 	"pi-spi": "1.0.1"
   },
