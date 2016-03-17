@@ -40,7 +40,7 @@ you can easly write jQuery style statements like `$$('temperature').get(callback
 
 ### Installing
 
-`npm install Favor-it`
+`npm install favor`
 
 #### errors installing on windows
 Some included packages do not build on windows. I'll be improving the install process to get around this.
@@ -49,11 +49,13 @@ your changes to devices.
 
 ### How do we get started?
 
-First, you'll need to create your Favor.js file. 
-This file describes your hardware setup. 
+First, you'll need to create your favor configuration file. 
+This file describes your hardware setup and is part of that magic which lets you run the same logic on 
+different hardware.
 
 
-The Favor.js file exports a single object with the following structure:
+The favor config file exports a single object with the following structure:
+
 #### name (string)
 This is a name for your device. 
 It does not have to be unique, but in the future may be used to identify your device.
@@ -72,34 +74,6 @@ Examples of component type are 'led', 'temperature', 'humidity', 'accelerometer'
 
 One special type of component is a 'link' component type - see below.
 
-#### link components component.type:'link'
-A linked component is a special type of component which has multiple value types returned.
- 
-For example. I had a combined temperature and humidity sensor, 
-but I didn't want to always get both values, and what would I call such a sensor 
-that would be consistent with other devices that only had temperature. 
-
-In code, I want to be able to get humidity without temperature and vice-versa. 
-This makes it so that if I run the same logic on a device which only has a temperature sensor, everything
-will still work.
-
-A linked component looks like this. 
-
-```
-{"type": "link", "name": "rht11", "structure":{ "temperature": {"address": 9}, "humidity": {"address": 10}
-	}}
-```
-
-Then, the linked components of temperature and humidity are described separately, as if they were distinct
-components.
-```
-{"type": "humidity", "link": "rht11"},
-{"type":"temperature", "name":"outside", "link": "rht11"}
- ```
-                    
-Using this method, we have a consistent way to get temperature from this linked sensor, 
-or a temperature only sensor, but using `$$('temperature').get(callback)`
-
 #### component.interface (string) required - valid values gpio | i2c | spi
 
 Describes the hardware interface to the component. 
@@ -112,29 +86,6 @@ gpio:	number
 i2c:	hex or number
 spi:	string of spi bus address eg: '/dev/spidev0.0'
 ```
-
-#### component.structure (object)
-Some components don't have a single address, or are a compilation of multiple components. 
-You can provide a structure that describes the makeup of that component. 
-
-As a simple example, take an RGB LED, the simple 4-prong type. You would not want to always turn on 
-each address at the same time, so you can provide a structure. 
-For example, an RGB LED may look like this. 
-```
-structure: {
-	"red" : 15,
-	"blue" : 16,
-	"green": 17
-}
-``` 
-where each entry in the structure points to an address.  
-               
-NOTE: a `structure` component is different from a `link` component where a `link` describes multiple
-components on a single chip, a `structure` describes multiple addresses on a single component. The main 
-difference being that a structure does not define it's components seperately. Using the rgb led example,
-you wouldn't independently reference the red of a tri-color led, as the red component is likely not considered
-screet. The same with say the 'x' axis of an accelerometer would rarely be considered completely outside the 
-context of the other axiis.
 
 #### component.name (string) required for linked components, optional for others
 This is simply a descriptive name of the component which can be used to query a specific
@@ -166,17 +117,14 @@ This way, for coloured leds which require a different format for different types
 use a single common method of defining a color scheme, for example an object `{r: x, g: y, b: z}` and the 
 format input to convert the input object into the format the chip requires to show the correct color.
 
+#### component.direction (string) 'in' | 'out' | 'high' | 'low' required
+
 #### component.get & component.set (array) i2c | Spi
-##### i2c 
+
 An array of objects which will be written to the i2c bus in order to interact 
 with the component.
 
-See interacting with i2c
-
-##### spi
-The buffer array to get passed to the component. 
-Note do not create this as a buffer, just pass the array and it will be 
-converted to a buffer before being submitted to the component.
+See interacting with i2c or Spi
 
 #### component.methods (array of objects)
 component methods allows you to specify special methods available to that component. One very important use for this is when 
@@ -196,7 +144,6 @@ standard GPIO pin. Therefore, this code will run the get method which was provid
 
 
 ### Interacting with i2c
-i2c can be a bit special, and I found it really complicated to understand at first. 
 There are a few things that need to happen to interact with an i2c component.
 
 1) the component 'might' need to be initialized
@@ -303,6 +250,58 @@ so no need to write these as a buffer yourself.
 			}
 ```	
 
+### Special component types
+
+#### link components component.type:'link'
+A linked component is a special type of component which has multiple value types returned.
+ 
+For example. I had a combined temperature and humidity sensor, 
+but I didn't want to always get both values, and what would I call such a sensor 
+that would be consistent with other devices that only had temperature. 
+
+In code, I want to be able to get humidity without temperature and vice-versa. 
+This makes it so that if I run the same logic on a device which only has a temperature sensor, everything
+will still work.
+
+A linked component looks like this. 
+
+```
+{"type": "link", "name": "rht11", "structure":{ "temperature": {"address": 9}, "humidity": {"address": 10}
+	}}
+```
+
+Then, the linked components of temperature and humidity are described separately, as if they were distinct
+components.
+```
+{"type": "humidity", "link": "rht11"},
+{"type":"temperature", "name":"outside", "link": "rht11"}
+ ```
+                    
+Using this method, we have a consistent way to get temperature from this linked sensor, 
+or a temperature only sensor, but using `$$('temperature').get(callback)`
+
+#### component.structure (object)
+Some components don't have a single address, or are a compilation of multiple components. 
+You can provide a structure that describes the makeup of that component. 
+
+As a simple example, take an RGB LED, the simple 4-prong type. You would not want to always turn on 
+each address at the same time, so you can provide a structure. 
+For example, an RGB LED may look like this. 
+```
+structure: {
+	"red" : 15,
+	"blue" : 16,
+	"green": 17
+}
+``` 
+where each entry in the structure points to an address.  
+               
+NOTE: a `structure` component is different from a `link` component where a `link` describes multiple
+components on a single chip, a `structure` describes multiple addresses on a single component. The main 
+difference being that a structure does not define it's components seperately. Using the rgb led example,
+you wouldn't independently reference the red of a tri-color led, as the red component is likely not considered
+screet. The same with say the 'x' axis of an accelerometer would rarely be considered completely outside the 
+context of the other axiis.
 
 ### Running Favor
 
