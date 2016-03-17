@@ -1,25 +1,23 @@
 function increment(cmd, evt) {
-	this.counts[cmd].push(evt.toString());
+	_fvr.i2c.counts[cmd].push(evt.toString());
 }
 
 function returnObj() {
-	return {
-		counts: this.counts,
-	};
+	return this._valueToSet;
 }
 var openSync = function(address) {
-	var i2c = new MockObj(address);
-	increment.call(i2c, 'open', 1);
-	return i2c;
+	_fvr.i2c = new MockObj(address);
+	increment('open', 1);
+	return _fvr.i2c;
 };
 
 var writeI2cBlock = function(address, cmd, length, val, cb) {
-	increment.call(this,'writeI2cBlock',[address, cmd, Buffer.isBuffer(val)]);
+	increment('writeI2cBlock',[address, cmd, Buffer.isBuffer(val)]);
 	cb.call(this, null, length, returnObj.call(this));
 };
 
 var readI2cBlock = function(address, cmd, length, val, cb) {
-	increment.call(this,'readI2cBlock', [address, cmd, Buffer.isBuffer(val)]);
+	increment('readI2cBlock', [address, cmd, Buffer.isBuffer(val)]);
 	cb.call(this, null, length, returnObj.call(this));
 };
 var on = function(data) {
