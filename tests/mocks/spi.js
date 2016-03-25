@@ -9,7 +9,6 @@ exports.order = {
 };
 
 function increment(cmd, evt) {
-	console.log('spi increment', evt)
 	_fvr.spi.counts.push([cmd, evt]);
 }
 
