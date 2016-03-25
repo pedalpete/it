@@ -13,7 +13,7 @@ module.exports = {
 		{type: 'led', name: 'rgb', structure: {
 			red: {address: 4}, green: {address: 5}, blue: {address: 6}
 		}, interface: 'gpio', formatInput: function(x) {
-			if (typeof x === 'string') return x;
+			if (typeof x === 'number') return x;
 
 			return x[Object.keys(this._component.structure)[this._index]];
 		}},

@@ -16,7 +16,7 @@
 	"beaglebone"
   ],
   "scripts": {
-    "test": "envade DEVICE_MOCK_PATH=../../tests/mocks/ -- jasmine-node tests --autotest --watch ."
+    "test": "envade DEVICE_MOCK_PATH=../../tests/mocks/ -- jasmine-node tests/device_abilities.spec.js --autotest --watch ."
   },
   "dependencies": {
     "async": "^1.4.2"

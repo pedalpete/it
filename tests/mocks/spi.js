@@ -8,6 +8,11 @@ exports.order = {
 	LSB_FIRST: 1
 };
 
+function increment(cmd, evt) {
+	console.log('spi increment', evt)
+	_fvr.spi.counts.push([cmd, evt]);
+}
+
 function isFunction(object) {
 	return object && typeof object == 'function';
 }
@@ -15,9 +20,10 @@ function isFunction(object) {
 exports.initialize = function(dev) {
 	var spi = {
 		address: dev,
-		transferred: 0
+		transferred: 0,
+		counts: [] 
 	};
-
+	_fvr.spi = spi;
 	spi.clockSpeed = function(speed) {
 		if (arguments.length < 1) return _speed;
 		else if (typeof speed === 'number') {
@@ -66,6 +72,7 @@ exports.initialize = function(dev) {
 		_transfer(null, readcount, cb);
 	};
 	spi.transfer = function(writebuf, readcount, cb) {
+		increment('transfer', [writebuf, readcount, !Buffer.isBuffer(writebuf)])
 		if (!Buffer.isBuffer(writebuf)) {
 			throw TypeError('Write data is not a buffer');
 		}
