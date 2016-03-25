@@ -12,6 +12,7 @@ var openSync = function(address) {
 };
 
 var writeI2cBlock = function(address, cmd, length, val, cb) {
+	console.log('write i2c')
 	increment('writeI2cBlock',[address, cmd, Buffer.isBuffer(val)]);
 	cb.call(this, null, length, returnObj.call(this));
 };
