@@ -119,8 +119,8 @@ describe('working with i2c', function() {
 		},1000);
 
 		runs(function() {
-			expect(mocki2c.writeI2cBlock.length).toBe(14);
-			expect(mocki2c.writeI2cBlock[13]).toBe('9,110,true');
+			expect(mocki2c.writeI2cBlock.length).toBe(13);
+			expect(mocki2c.writeI2cBlock[12]).toBe('9,110,true');
 		});
 	});
 
