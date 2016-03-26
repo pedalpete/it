@@ -186,7 +186,7 @@ describe('formatOutput', function() {
 		var x;
 
 		runs(function() {
-			$$('temperature#formatOutput').get(function(val) {
+			$$('temperature#formatOutputGpio').get(function(val) {
 				x = val;
 				changed = true;
 			});
