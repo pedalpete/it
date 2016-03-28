@@ -10,12 +10,12 @@ describe('setters getters', function() {
 				check = val + 1;
 			});
 		});
-		
+
 		waitsFor(function() {
 			return check;
 		}, 1000);
 		// doesn't return on 0, so need to add one.
-		runs(function(){
+		runs(function() {
 			expect(check).toBe(1);
 		});
 	});
@@ -23,20 +23,20 @@ describe('setters getters', function() {
 	it('should set the value for the led', function() {
 		var led = $$('led*1');
 		var check;
-		runs(function(){
+		runs(function() {
 			led.set(1, function(val, data) {
 				check = val;
 			});
 		});
-		
-		waitsFor(function(){
+
+		waitsFor(function() {
 			return check;
 		},1000);
-		
-		runs(function(){
+
+		runs(function() {
 			expect(check).toBe(1);
 			led.set(0, function() {});
-		})
+		});
 	});
 
 	it('should set the change watcher', function() {
@@ -83,7 +83,6 @@ describe('use component defined methods', function() {
 		});
 	});
 });
-
 
 describe('use linked components', function() {
 	it('should get values from linked component', function() {

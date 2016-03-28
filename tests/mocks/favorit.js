@@ -49,14 +49,16 @@ module.exports = {
 			set: {type: 'write', cmd: 0x6E, val: true, formatInput: function(val) {
 				return [val.r, val.g, val.b];
 			}}, interface: 'i2c'},
-		{type: 'accelerometer', name: 'formatOutputI2c', path: 0, address: 0x11, init: [
-			{type: 'write', cmd: 0x2D, val: [1 << 3]},
-			{type: 'write', cmd: 0x31, val: [0x09]},
-			{type: 'write', cmd: 0x2c, val: [8 + 2 + 1]}],
-			get: {type: 'read', cmd: 0x33, val: 6}, interface: 'i2c',
-				formatOutput: postFormat},
-		{type: 'temperature', name: 'formatOutputGpio',  address: 9, interface: 'gpio',
-			formatOutput: postFormat},
+		{type: 'accelerometer', name: 'formatOutputI2c',
+			path: 0, address: 0x11, init: [
+				{type: 'write', cmd: 0x2D, val: [1 << 3]},
+				{type: 'write', cmd: 0x31, val: [0x09]},
+				{type: 'write', cmd: 0x2c, val: [8 + 2 + 1]}
+			],
+			get: {type: 'read', cmd: 0x33, val: 6},
+				interface: 'i2c', formatOutput: postFormat},
+		{type: 'temperature', name: 'formatOutputGpio',  address: 9,
+			interface: 'gpio', formatOutput: postFormat},
 		{type: 'temperature', name: 'spi', interface: 'spi',
 			address: '/dev/spidev0.0',
 			get: {val: [0x23, 0x48, 0xAF, 0x19, 0x19, 0x19]}},

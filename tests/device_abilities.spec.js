@@ -32,7 +32,7 @@ describe('components', function() {
 		var noMatch = $$('led.none');
 		expect(noMatch._componentMatches.length).toBe(0);
 	});
-	
+
 	it('should search components by attribute', function() {
 		var spiLed = $$('led[interface=spi]');
 		expect(spiLed._componentMatches.length).toBe(1);

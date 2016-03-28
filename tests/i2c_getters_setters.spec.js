@@ -65,10 +65,12 @@ describe('working with i2c', function() {
 
 	it('should take a function as the set value', function() {
 		var mocki2c;
+		var val;
 		var led = $$('led#blinkm_with_func');
 		runs(function() {
 			led.set({r: 1, g: 2, b: 3},
 				function(f) {
+				val = f;
 				mocki2c = _fvr.i2c.counts;
 			});
 		});
@@ -78,6 +80,7 @@ describe('working with i2c', function() {
 		},1000);
 
 		runs(function() {
+			expect(val.g).toBe(2);
 			expect(mocki2c.writeI2cBlock.length).toBe(9);
 			expect(mocki2c.writeI2cBlock[8]).toBe('5,110,true');
 		});

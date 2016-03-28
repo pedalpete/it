@@ -20,7 +20,7 @@ exports.initialize = function(dev) {
 	var spi = {
 		address: dev,
 		transferred: 0,
-		counts: [] 
+		counts: []
 	};
 	_fvr.spi = spi;
 	spi.clockSpeed = function(speed) {
@@ -71,7 +71,7 @@ exports.initialize = function(dev) {
 		_transfer(null, readcount, cb);
 	};
 	spi.transfer = function(writebuf, readcount, cb) {
-		increment('transfer', [writebuf, readcount, !Buffer.isBuffer(writebuf)])
+		increment('transfer', [writebuf, readcount, !Buffer.isBuffer(writebuf)]);
 		if (!Buffer.isBuffer(writebuf)) {
 			throw TypeError('Write data is not a buffer');
 		}
