@@ -2,9 +2,6 @@ function increment(cmd, evt) {
 	_fvr.i2c.counts[cmd].push(evt.toString());
 }
 
-function returnObj() {
-	return this._valueToSet;
-}
 var openSync = function(address) {
 	_fvr.i2c = new MockObj(address);
 	increment('open', 1);
@@ -13,12 +10,12 @@ var openSync = function(address) {
 
 var writeI2cBlock = function(address, cmd, length, val, cb) {
 	increment('writeI2cBlock',[address, cmd, Buffer.isBuffer(val)]);
-	cb.call(this, null, length, returnObj.call(this));
+	cb.call(this, null, length, val);
 };
 
 var readI2cBlock = function(address, cmd, length, val, cb) {
 	increment('readI2cBlock', [address, cmd, Buffer.isBuffer(val)]);
-	cb.call(this, null, length, returnObj.call(this));
+	cb.call(this, null, length, val);
 };
 var on = function(data) {
 	var res;

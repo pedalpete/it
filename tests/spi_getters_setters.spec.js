@@ -17,7 +17,7 @@ describe('spi', function() {
 		},1000);
 
 		runs(function() {
-			expect(getSpi.length).toBe(6);
+			expect(getSpi.length).toBe(1);
 			expect(_fvr[device._index].initialized).toBeTruthy();
 		});
 	});
@@ -37,7 +37,7 @@ describe('spi', function() {
 		},1000);
 
 		runs(function() {
-			expect(getSpi.length).toBe(6);
+			expect(getSpi.length).toBe(1);
 			expect(_fvr[device._index]._spi.transferred).toBe(2);
 		});
 	});

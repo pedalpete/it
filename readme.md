@@ -179,11 +179,6 @@ The values to write to the device.
 Hex and arrays will be put into a buffer and sent to the device.
 
 A value of true will pass an input value run an input value through formatInput if defined.
-##### wait (number milliseconds) optional
-Some i2c components require a time period to be passed before the next command
-can be written. The `wait` attribute will pause after the current command is 
-written and will continue with the next command in the array after the alloted 
-time has been waited.
 
 ##### formatInput (function) optional
 If defined, Favor will run the formatInput function and the output will be written to the device. 
