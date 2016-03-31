@@ -1,8 +1,8 @@
 {
   "author": "Pete Field aka. PedalPete",
   "name": "favor",
-  "description": "jquery like library for interacting with IoT devices",
-  "version": "0.0.12",
+  "description": "A simple library for creating write once-run anywhere for IoT and devices",
+  "version": "0.0.13",
   "main": "./index.js",
   "keywords": [
     "IoT",

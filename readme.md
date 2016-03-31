@@ -1,4 +1,5 @@
 #Favor
+![Favor Logo](https://avatars0.githubusercontent.com/u/6392732?v=3&s=100)
 ## A simple library for interacting with IoT devices.
 
 Favor is a javascript/node.js library to abstract away complex and inconsistent hardware interfaces into a single simple to use API.
@@ -10,6 +11,9 @@ Have you ever wanted to write
 `$$('temperature').get(function(temp) { console.log('The temperature is ', temp) };`
 
 Well, now you can, and run on multiple devices without mixing business logic with device configuration considerations.
+
+Check out the demo video of getting started with Favor.
+[![demo hello world led video](http://i3.ytimg.com/vi/bHKyFJ41amA/hqdefault.jpg)](https://www.youtube.com/watch?v=bHKyFJ41amA "Getting Started With Favor")
 
 ### Supported Versions of node
 Favor has been tested with node v4, it should also work with v5. v0.10 and v0.12 have not been tested and may not work. 

@@ -22,20 +22,24 @@ describe('setters getters', function() {
 
 	it('should set the value for the led', function() {
 		var led = $$('led*1');
-		var check;
+		var check = [];
 		runs(function() {
-			led.set(1, function(val, data) {
-				check = val;
+			led.set(1, function(val) {
+				check.push(val);
+				led.set(0, function(val) {
+					check.push(val);
+				});
 			});
 		});
 
 		waitsFor(function() {
-			return check;
+			return check.length === 2;
 		},1000);
 
 		runs(function() {
-			expect(check).toBe(1);
-			led.set(0, function() {});
+			expect(check[0]).toBe(1);
+			expect(check[1]).toBe(0);
+			check = false;
 		});
 	});
 
