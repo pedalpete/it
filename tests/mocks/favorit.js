@@ -5,6 +5,7 @@ function postFormat(val) {
 module.exports = {
 	name: 'Test-Device',
 	'gpio-path': 'tests/gpio-test/class/gpio',
+	'i2c-bus': '/test/i2cbus',
 	components: [
 		{type: 'led', color: 'yellow', address: 1, interface: 'gpio'},
 		{type: 'led', address: 2, interface: 'gpio'},
@@ -27,30 +28,30 @@ module.exports = {
 			{get: require('./linked_temp_humidity_mock')}],
 			structure: {'temperature': {'address': 9}, humidity: {address: 10}},
 			interface: 'gpio'},
-		{type: 'accelerometer', path: 6, name: 'bridge', address: 1, init: [
+		{type: 'accelerometer', name: 'bridge', address: 1, init: [
 			{type: 'write', cmd: 0x2D, val: [1 << 3]},
 			{type: 'write', cmd: 0x31, val: [0x09]},
             {type: 'write', cmd: 0x2c, val: [8 + 2 + 1]}
 		], get: {type: 'read', cmd: 0x33}, interface: 'i2c'},
-		{type: 'accelerometer', path: 5, name: 'test_wait', address: 0x1d, init: [
+		{type: 'accelerometer', name: 'test_wait', address: 0x1d, init: [
 			{type: 'write', cmd: 0x2D, val: [1 << 3]},
 			{type: 'write', cmd: 0x31, val: [0x09], wait: 500},
 			{type: 'write', cmd: 0x2c, val: [8 + 2 + 1], wait: 500}],
 			get: {type: 'read', cmd: 0x33}, interface: 'i2c'},
-		{type: 'accelerometer', path: 4, name: 'init_stream', address: 0x1d, init: [
+		{type: 'accelerometer', name: 'init_stream', address: 0x1d, init: [
 			{type: 'write',cmd: 0x2D, val: [1 << 3]},
 			{type: 'write',cmd: 0x31, val: [0x09], wait: 500},
 			{type: 'write',cmd: 0x2c, val: [8 + 2 + 1], wait: 500}],
 			get: {type: 'read', cmd: 0x33, val: 6}, interface: 'i2c'},
-		{type: 'led', path: 2, name: 'blinkm', address: 0x09,
+		{type: 'led', name: 'blinkm', address: 0x09,
 			init: {type: 'write', cmd: 0x6d},
 			set: {type: 'write', cmd: 0x6E, val: true}, interface: 'i2c'},
-		{type: 'led', path: 1, address: 0x05, name: 'blinkm_with_func',
+		{type: 'led', address: 0x05, name: 'blinkm_with_func',
 			set: {type: 'write', cmd: 0x6E, val: true, formatInput: function(val) {
 				return [val.r, val.g, val.b];
 			}}, interface: 'i2c'},
 		{type: 'accelerometer', name: 'formatOutputI2c',
-			path: 0, address: 0x11, init: [
+			address: 0x11, init: [
 				{type: 'write', cmd: 0x2D, val: [1 << 3]},
 				{type: 'write', cmd: 0x31, val: [0x09]},
 				{type: 'write', cmd: 0x2c, val: [8 + 2 + 1]}
