@@ -35,11 +35,9 @@ var stream = function(command, length, delay) {
 };
 
 var reset = function() {
-	return this.count = {
-		writeI2cBlock: [],
-		readI2cBlock: [],
-		open: []
-	};
+	this.writeI2cBlock = [];
+	this.readI2cBlock = [];
+	this.open = [];
 };
 
 var MockObj = function(address) {
@@ -52,9 +50,9 @@ var MockObj = function(address) {
 		counts: {
 			writeI2cBlock: [],
 			readI2cBlock: [],
-			open: []
+			open: [],
+			reset: reset
 		},
-		reset: reset
 	};
 };
 

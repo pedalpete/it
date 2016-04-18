@@ -8,21 +8,29 @@ exports.order = {
 	LSB_FIRST: 1
 };
 
-function increment(cmd, evt) {
-	_fvr.spi.counts.push([cmd, evt]);
-}
-
 function isFunction(object) {
 	return object && typeof object == 'function';
 }
 
-exports.initialize = function(dev) {
+var initialize = function(dev) {
 	var spi = {
 		address: dev,
 		transferred: 0,
 		counts: []
 	};
+
 	_fvr.spi = spi;
+
+	spi.increment = function(cmd, evt) {
+		spi.counts.push([cmd, evt]);
+		spi.transferred++;
+	};
+
+	spi.reset = function() {
+		spi.counts = [];
+		spi.transferred = 0;
+	};
+
 	spi.clockSpeed = function(speed) {
 		if (arguments.length < 1) return _speed;
 		else if (typeof speed === 'number') {
@@ -52,8 +60,7 @@ exports.initialize = function(dev) {
 
 	function _transfer(txbuf, length, callback) {
 		var err = null;
-		isFunction(callback) && callback(err, txbuf);
-		return spi.transferred++;
+		isFunction(callback) && callback(err, spi);
 	}
 
 	spi.write = function(writebuf, cb) {
@@ -63,6 +70,7 @@ exports.initialize = function(dev) {
 		if (typeof cb !== 'function') throw TypeError('Callback not provided');
 		_transfer(writebuf, 0, cb);
 	};
+
 	spi.read = function(readcount, cb) {
 		if (typeof readcount !== 'number') {
 			throw TypeError('Read count is not a number');
@@ -71,7 +79,7 @@ exports.initialize = function(dev) {
 		_transfer(null, readcount, cb);
 	};
 	spi.transfer = function(writebuf, readcount, cb) {
-		increment('transfer', [writebuf, readcount, !Buffer.isBuffer(writebuf)]);
+		spi.increment('transfer', [writebuf, readcount, !Buffer.isBuffer(writebuf)]);
 		if (!Buffer.isBuffer(writebuf)) {
 			throw TypeError('Write data is not a buffer');
 		}
@@ -90,3 +98,9 @@ exports.initialize = function(dev) {
 
 	return spi;
 };
+
+var SPI = {
+	initialize: initialize
+};
+
+module.exports = SPI;

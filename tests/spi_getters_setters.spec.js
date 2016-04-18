@@ -8,7 +8,7 @@ describe('spi', function() {
 		runs(function() {
 			$$('temperature#spi').get(function(data) {
 				device = this;
-				getSpi = data;
+				getSpi = data[0];
 			});
 		});
 
@@ -17,7 +17,7 @@ describe('spi', function() {
 		},1000);
 
 		runs(function() {
-			expect(getSpi.length).toBe(1);
+			expect(getSpi.counts.length).toBe(1);
 			expect(_fvr[device._index].initialized).toBeTruthy();
 		});
 	});
@@ -28,7 +28,7 @@ describe('spi', function() {
 		runs(function() {
 			$$('temperature#spi').get(function(data) {
 				device = this;
-				getSpi = data;
+				getSpi = data[0];
 			});
 		});
 
@@ -37,8 +37,8 @@ describe('spi', function() {
 		},1000);
 
 		runs(function() {
-			expect(getSpi.length).toBe(1);
-			expect(_fvr[device._index]._spi.transferred).toBe(2);
+			expect(getSpi.counts.length).toBe(2);
+			getSpi.reset();
 		});
 	});
 
