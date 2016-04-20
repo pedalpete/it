@@ -1,8 +1,8 @@
 {
   "author": "Pete Field aka. PedalPete",
   "name": "favor",
-  "description": "A simple library for creating write once-run anywhere for IoT and devices",
-  "version": "0.0.14",
+  "description": "A simple library for creating hardware-agnostic IoT applications in Javascript",
+  "version": "0.0.15",
   "main": "./index.js",
   "keywords": [
     "IoT",

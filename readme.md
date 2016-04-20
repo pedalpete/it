@@ -1,6 +1,6 @@
 #Favor
 ![Favor Logo](https://avatars0.githubusercontent.com/u/6392732?v=3&s=100)
-## A simple library for interacting with IoT devices.
+## A simple library for creating hardware agnostic IoT devices.
 
 Favor is a javascript/node.js library to abstract away complex and inconsistent hardware interfaces into a single simple to use API.
 
@@ -14,6 +14,21 @@ Well, now you can, and run on multiple devices without mixing business logic wit
 
 Check out the demo video of getting started with Favor.
 [![demo hello world led video](http://i3.ytimg.com/vi/bHKyFJ41amA/hqdefault.jpg)](https://www.youtube.com/watch?v=bHKyFJ41amA "Getting Started With Favor")
+
+### What do you mean by Hardware agnostic
+
+In this sense, hardware agnostic means that you can write your business logic
+without needing to worry about what hardware it will run on. 
+
+Currently Favor works with linux based devices like the Raspberry Pi, Beaglebone
+and others. But more than just the hardware platform, with Favor you can run
+your application on different chips and sensors, without needing to consider
+what type of chip the application is runnning on, or even what protocol (gpio, I2C, SPI).
+
+Favor makes it possible to run your application on completely different hardware.
+
+Other platforms are currently in the process of being supported, and more
+protocols can be added as well. Need something special? Just ask!
 
 ### Supported Versions of node
 Favor has been tested with node v4, it should also work with v5. v0.10 and v0.12 have not been tested and may not work. 
