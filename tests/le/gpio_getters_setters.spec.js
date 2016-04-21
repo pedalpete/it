@@ -45,7 +45,7 @@ describe('working with gpio', function() {
 	});
 
 	it('should get a digital gpio', function() {
-		var temp = $$('temperature');
+		var temp = $$('temperature.gpio');
 		var check;
 
 		global.digitalRead = jasmine.createSpy('digitalRead')
