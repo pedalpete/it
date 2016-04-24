@@ -110,6 +110,27 @@ describe('working with i2c', function() {
 		});
 	});
 
+	it('should get linked i2c', function() {
+		var mocki2c;
+		var val;
+		var temp = $$('temp.i2cLink');
+
+		runs(function() {
+			temp.get(function(data) {
+				console.log('data', data);
+				mocki2c = _fvr.i2c.counts;
+				val = data;
+			});
+		});
+
+		waitsFor(function() {
+			return val;
+		}, 1000);
+
+		runs(function() {
+			expect(val).toBe(80);
+		});
+	});
 	// it('should error if get or set is not defined', function() {
 	// 	var mocki2c;
 	// 	var led = $$('led#blinkm');

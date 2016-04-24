@@ -70,6 +70,14 @@ module.exports = {
 		init: {val: [0x00, 0x00, 0x00, 0x00]},
 		set: {val: true, formatInput: function(val) {
 			return val;
-		}}, interface: 'spi', formatOutput: function(val) { return val.toString();}}
+		}}, interface: 'spi', formatOutput: function(val) { return val.toString();}},
+		{type: 'link', name: 'HiH-6130', interface: 'i2c', address: 0x27, get: {
+			type: 'write', cmd: 0, val: new Buffer(4)}, formatOutput: function(buf) {
+				return {
+					temperature: 80
+				};
+			}
+		},
+		{type: 'temperature', name: 'i2cLink', link: 'HiH-6130'}
 	]
 };
