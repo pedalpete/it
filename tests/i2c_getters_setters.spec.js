@@ -117,7 +117,6 @@ describe('working with i2c', function() {
 
 		runs(function() {
 			temp.get(function(data) {
-				console.log('data', data);
 				mocki2c = _fvr.i2c.counts;
 				val = data;
 			});
