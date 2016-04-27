@@ -63,3 +63,7 @@ you can easly write jQuery style statements like `$$('temperature').get(callback
 
 ### See the favor wiki for more documentation
 [Favor Wiki](https://github.com/favor/it/wiki)
+
+### Live-code example of getting data from a temperature sensor
+
+[![Get Temperature - live code]](http://i3.ytimg.com/vi/ujHa-I3ZRUM.jpg)](https://www.youtube.com/watch?v=ujHa-I3ZRUM "Get Temperature live-code example")
