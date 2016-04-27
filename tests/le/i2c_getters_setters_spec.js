@@ -18,7 +18,9 @@ describe('initialize i2c', function() {
 		}, 1000);
 
 		runs(function() {
-			expect(check).toBe(100);
+			expect(check.length).toBe(4);
+			expect(check.pop()[0]).toBe(83);
+			I2C.reset();
 		});
 	});
 });

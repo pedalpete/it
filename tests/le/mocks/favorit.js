@@ -14,10 +14,10 @@ module.exports = {
 		interface: 'gpio'},
 		{type: 'adxl345', interface: 'i2c',
 			address: 0x53, init: [
-				{type: 'write', cmd: [0x31,0x09]},
-				{type: 'write', cmd: [0x2c]}
+				{type: 'write', cmd: 0x31},
+				{type: 'write', cmd: 0x2c}
 			], get: [
-				{type: 'write', cmd: [0x32]},
+				{type: 'write', cmd: 0x32},
 				{type: 'read', length: 6}
 			]
 		}
