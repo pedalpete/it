@@ -9,25 +9,23 @@ module.exports = {
 	components: [
 		{type: 'led', color: 'yellow', address: 1, interface: 'gpio'},
 		{type: 'led', address: 2, interface: 'gpio'},
-		{type: 'led', address: 3, name: 'has_get', interface: 'gpio', methods: [
-		{get: require('./component_methods')}]},
+		{type: 'led', address: 3, name: 'has_get', interface: 'gpio',
+		get: require('./component_methods')},
 		{type: 'led', name: 'rgb', structure: {
 			red: {address: 4}, green: {address: 5}, blue: {address: 6}
 		}, interface: 'gpio', formatInput: function(x) {
 			if (typeof x === 'number') return x;
-
 			return x[Object.keys(this._component.structure)[this._index]];
 		}},
 		{type: 'button', name: 'light',address: 7, interface: 'gpio'},
-		{type: 'link', name: 'rht03',address: 8, methods: [
-			{get: require('./linked_temp_humidity_mock')}], interface: 'gpio'},
-		{type: 'temperature', name: 'link',link: 'rht03'},
+		{type: 'link', name: 'rht03',address: 8,
+			get: require('./linked_temp_humidity_mock')},
+		{type: 'temperature', name: 'link', link: 'rht03'},
 		{type: 'humidity', link: 'rht03'},
 		{type: 'temperature', name: 'outside', link: 'rht11'},
-		{type: 'link', name: 'rht11', methods: [
-			{get: require('./linked_temp_humidity_mock')}],
-			structure: {'temperature': {'address': 9}, humidity: {address: 10}},
-			interface: 'gpio'},
+		{type: 'link', name: 'rht11',
+			get: require('./linked_temp_humidity_mock'),
+			structure: {'temperature': {'address': 9}, humidity: {address: 10}}},
 		{type: 'accelerometer', name: 'bridge', address: 1, init: [
 			{type: 'write', cmd: 0x2D, val: [1 << 3]},
 			{type: 'write', cmd: 0x31, val: [0x09]},
