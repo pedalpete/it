@@ -1,6 +1,11 @@
 #Favor
-![Favor Logo](https://avatars0.githubusercontent.com/u/6392732?v=3&s=100)
-## A simple library for creating hardware agnostic IoT devices.
+![Favor Logo](https://avatars0.githubusercontent.com/u/6392732?v=3&u=f09ed61c17bb341847c81028090c36c5b005aa8b&s=200)
+
+[![bitHound Overall Score](https://www.bithound.io/github/favor/it/badges/score.svg)](https://www.bithound.io/github/favor/it)
+[![bitHound Dependencies](https://www.bithound.io/github/favor/it/badges/dependencies.svg)](https://www.bithound.io/github/favor/it/master/dependencies/npm)
+[![bitHound Code](https://www.bithound.io/github/favor/it/badges/code.svg)](https://www.bithound.io/github/favor/it)
+
+# A simple library for creating hardware agnostic IoT devices.
 
 Favor is a javascript/node.js library to abstract away complex and inconsistent hardware interfaces into a single simple to use API.
 
