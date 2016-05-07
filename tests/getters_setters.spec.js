@@ -152,7 +152,7 @@ describe('watch for data on gpio elements', function() {
 		var watchEvents = [];
 		function testRemove(data) {
 			watchEvents.push(data);
-			if (watchEvents.length === 6) {
+			if (watchEvents.length === 4) {
 				$$('temperature[link=rht03]').removeWatch(testRemove);
 			}
 		}
