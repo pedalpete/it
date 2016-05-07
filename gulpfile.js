@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var jscs = require('gulp-jscs');
 var jshint = require('gulp-jshint');
 
-var jsFiles = ['./*.js', './**/*.js'];
+var jsFiles = ['./*.js', './**/*.js', '!./node_modules/*'];
 
 gulp.task('jshint', function() {
 	gulp.src('./index.js')
@@ -12,5 +12,6 @@ gulp.task('jshint', function() {
 
 gulp.task('jscs', function() {
 	return gulp.src(jsFiles)
-		.pipe(jscs());
+		.pipe(jscs())
+        .pipe(jscs.reporter());
 });

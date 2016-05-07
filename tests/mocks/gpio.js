@@ -1,24 +1,35 @@
 var thisOnChange;
-var mockPiPins = {
-	onChange: null,
-	read: function(cb) {
-		cb.call(this, null, this.pin.value || 0);
-	},
-	write: function(val, cb) {
-		this.pin.value = val;
+function watchChanges() {
+	if (this.onChange.length > 0) {
+		this.onChange.forEach(function(cbWatch) {
+			cbWatch(this.pinValue);
+		});
+	}
+}
+function MockPiPins() {
+	return {
+		onChange: [],
+		read: function(cb) {
+			watchChanges.call(this);
+			cb.call(this, null, this.pin.value || 0);
+		},
+		write: function(val, cb) {
+			this.pin.value = val;
 
-		//trigger 'on so we can test it'
-		if (this.onChange) {
-			this.onChange.call(null, this.pin.value);
-		}
-		return cb.call(this, null, this.pin.value);
-	},
-	watch: function(cb) {
-		this.onChange = cb;
-	},
-	pin: {}
+			watchChanges.call(this);
+			return cb.call(this, null, this.pin.value);
+		},
+		watch: function(cb) {
+			this.onChange.push(cb);
+		},
+		unwatch: function(cb) {
+			var idx = this.onChange.indexOf(cb);
+			this.onChange.splice(idx, 1);
+		},
+		pin: {}
+	};
 };
 
 module.exports = function() {
-	return mockPiPins;
+	return new MockPiPins;
 };

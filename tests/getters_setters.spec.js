@@ -50,7 +50,7 @@ describe('setters getters', function() {
 			return wasPressed = true;
 		}
 
-		button.on('change', pressed);
+		button.watch(pressed);
 		expect(_fvr[button._componentMatches[0]].initialized).toBeTruthy();
 
 		runs(function() {
@@ -132,7 +132,7 @@ describe('on Change events', function() {
 		}
 		runs(function() {
 			var led = $$('led#rgb');
-			led.on('change', watchEvt);
+			led.watch(watchEvt);
 			led.set({red: 1, green: 2, blue: 3}, function() {
 			});
 		});
@@ -147,41 +147,29 @@ describe('on Change events', function() {
 	});
 });
 
-/* failing event emitter, needs a fixin'
 describe('watch for data on gpio elements', function() {
-   it('should trigger the eventEmitter on data updates', function() {
-       var watchEvents = [];
-       var done = false;
+	it('should trigger the on data updates', function() {
+		var watchEvents = [];
+		function testRemove(data) {
+			watchEvents.push(data);
+			if (watchEvents.length === 6) {
+				$$('temperature[link=rht03]').removeWatch(testRemove);
+			}
+		}
 
-       function testRemove (data) {
-            watchEvents.push(data);
-            console.log('watch events', watchEvents.length);
-            if (watchEvents.length === 4) {
-                console.log('before timeout');
-                $$('temperature').removeListener('data', testRemove);
-                console.log('start timeout');
-                setTimeout(function() {
-                    done = true;
-                }, 1000);
-            }
-       }
+		runs(function() {
+			$$('temperature[link=rht03]').watch(testRemove);
+		});
 
-       runs(function() {
-          $$('temperature').on('data', testRemove);
-       });
+		waitsFor(function() {
+			return watchEvents.length > 3;
+		}, 2000);
 
-       waitsFor(function() {
-           return done;
-       }, 3000);
-
-       runs(function() {
-           console.log('Works');
-           expect(watchEvents.length).toBe(4);
-       });
-   });
+		runs(function() {
+			expect(watchEvents.length).toBe(4);
+		});
+	});
 });
-
-*/
 
 describe('formatOutput', function() {
 	it('should run a formatOutput before returning on gpio', function() {
