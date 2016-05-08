@@ -174,27 +174,27 @@ describe('working with i2c', function() {
 			expect(watchEvents.length).toBe(5);
 		});
 	});
-	
+
 	it('should watch for input changes', function() {
 		var watched;
-		
+
 		function watchInput(data) {
 			watched = data;
 		}
-		
+
 		runs(function() {
 			$$('led#blinkm').watch(watchInput);
 			$$('led#blinkm').set(1, function() {
 				// nothing needed here
-			});	
+			});
 		});
-		
+
 		waitsFor(function() {
 			return watched;
 		}, 1000);
 
 		runs(function() {
 			expect(watched).toBe(1);
-		})
+		});
 	});
 });
