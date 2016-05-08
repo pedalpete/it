@@ -72,3 +72,6 @@ you can easly write jQuery style statements like `$$('temperature').get(callback
 ### Live-code example of getting data from a temperature sensor
 
 [![Get Temperature - live code](http://i3.ytimg.com/vi/ujHa-I3ZRUM/hqdefault.jpg)](https://www.youtube.com/watch?v=ujHa-I3ZRUM "Get Temperature live-code example")
+
+### Live-code example of watching buttons and sensors
+[![Watch Sensors - live code](http://i3.ytimg.com/vi/-TNrHAl5VF0/hqdefault.jps)](https://www.youtube.com/watch?v=-TNrHAl5VF0 "Watch buttons and values live-code example")
