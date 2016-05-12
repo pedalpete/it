@@ -9,23 +9,24 @@
     "it",
     "favor",
     "favor.it",
-	"gpio",
-	"spi",
-	"i2c",
-	"raspberrypi",
-	"beaglebone"
+    "gpio",
+    "spi",
+    "i2c",
+    "raspberrypi",
+    "beaglebone"
   ],
   "scripts": {
     "test": "envade DEVICE_MOCK_PATH=../../tests/mocks/ -- jasmine-node tests --autotest --watch .",
-    "test-le" : "envade DEVICE_MOCK_PATH=../../lib/protocols/le/ -- jasmine-node tests/le --autotest --watch"
+    "test-le": "envade DEVICE_MOCK_PATH=../../lib/protocols/le/ -- jasmine-node tests/le --autotest --watch",
+    "build-le": "webpack --define process.env.DEVICE_MOCK_PATH='\"../../lib/protocols/le/\"' --optimize-minimize"
   },
   "dependencies": {
     "async": "^1.4.2"
   },
-  "optionalDependencies" : {
-	"onoff": "1.0.3",
+  "optionalDependencies": {
+    "onoff": "1.0.3",
     "i2c-bus": "1.0.2",
-	"pi-spi": "1.0.1"
+    "pi-spi": "1.0.1"
   },
   "devDependencies": {
     "envade": "^1.0.3",
@@ -33,7 +34,8 @@
     "gulp": "^3.9.0",
     "gulp-jscs": "^2.0.0",
     "gulp-jshint": "^1.11.2",
-    "jasmine-node": "latest"
+    "jasmine-node": "latest",
+    "webpack": "^1.13.0"
   },
   "repository": {
     "type": "git",
