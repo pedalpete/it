@@ -2,7 +2,7 @@
   "author": "Pete Field aka. PedalPete",
   "name": "favor",
   "description": "A simple library for creating hardware-agnostic IoT applications in Javascript",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "main": "./index.js",
   "keywords": [
     "IoT",
