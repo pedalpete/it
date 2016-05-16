@@ -216,3 +216,22 @@ describe('format input', function() {
 		});
 	});
 });
+
+describe('initialize only', function() {
+	it('should initialize the sensor', function() {
+		var init;
+		runs(function() {
+			$$('init_only').initialize(function(val) {
+				init = val;
+			});
+		});
+
+		waitsFor(function() {
+			return init;
+		}, 500);
+
+		runs(function() {
+			expect(init).toBe(true);
+		});
+	});
+});

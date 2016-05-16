@@ -198,3 +198,22 @@ describe('working with i2c', function() {
 		});
 	});
 });
+
+describe('i2c initialize only', function() {
+	it('should only initialize', function() {
+		var init;
+		runs(function() {
+			$$('init_only_i2c').initialize(function(val) {
+				init = val;
+			});
+		});
+
+		waitsFor(function() {
+			return init;
+		}, 500);
+
+		runs(function() {
+			expect(init).toBe(true);
+		});
+	});
+});

@@ -74,6 +74,13 @@ module.exports = {
 				};
 			}
 		},
-		{type: 'temperature', name: 'i2cLink', link: 'HiH-6130'}
+		{type: 'temperature', name: 'i2cLink', link: 'HiH-6130'},
+		{type: 'init_only', interface: 'gpio', address: 22},
+		{type: 'init_only_i2c', interface: 'i2c', address: 0x00,
+			init: {type: 'write', cmd: 0}, get: {type: 'read', cmd: 1}
+		},
+		{type: 'init_only_spi', interface: 'spi', address: '/dev/spidev0.1',
+			init: {val: [0x00, 0x00]}, set: 0x3dD
+		}
 	]
 };

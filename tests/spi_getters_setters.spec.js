@@ -105,3 +105,22 @@ describe('spi', function() {
 		});
 	});
 });
+
+describe('initialize only', function() {
+	it('should initialize spi', function() {
+		var init;
+		runs(function() {
+			$$('init_only_spi').initialize(function(val) {
+				init = val;
+			});
+		});
+
+		waitsFor(function() {
+			return init;
+		}, 500);
+
+		runs(function() {
+			expect(init).toBe(true);
+		});
+	});
+});
