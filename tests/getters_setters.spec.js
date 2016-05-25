@@ -235,3 +235,14 @@ describe('initialize only', function() {
 		});
 	});
 });
+
+describe('closing components', function() {
+	it('should unexport each component of type gpio', function() {
+		var gpio = $$('led.gpio*1');
+		var initialized = _fvr[gpio._componentMatches[0]].initialized;
+
+		gpio.close();
+		expect(initialized).toBe(true);
+		expect(_fvr[gpio._componentMatches[0]].initialized).toBe(false);
+	});
+});

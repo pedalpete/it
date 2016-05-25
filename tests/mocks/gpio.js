@@ -24,8 +24,10 @@ function MockPiPins() {
 		},
 		unwatch: function(cb) {
 			var idx = this.onChange.indexOf(cb);
-			console.log('idx', idx);
 			this.onChange.splice(idx, 1);
+		},
+		unexport: function() {
+			// what to put in unexport mock?
 		},
 		pin: {}
 	};

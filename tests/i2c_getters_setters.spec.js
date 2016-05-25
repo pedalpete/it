@@ -217,3 +217,14 @@ describe('i2c initialize only', function() {
 		});
 	});
 });
+
+describe('closing i2c', function() {
+	it('should close i2c bus', function() {
+		var led = $$('led#blinkm');
+		var initialized = _fvr[led._componentMatches[0]].initialized;
+
+		led.close();
+		expect(initialized).toBe(true);
+		expect(_fvr[led._componentMatches[0]].initialized).toBe(false);
+	});
+});

@@ -40,6 +40,10 @@ var reset = function() {
 	this.open = [];
 };
 
+var closeSync = function() {
+	// not sure how to get this into an output...
+};
+
 var MockObj = function(address) {
 	return {
 		address: address,
@@ -47,6 +51,7 @@ var MockObj = function(address) {
 		readI2cBlock: readI2cBlock,
 		on: on,
 		stream: stream,
+		closeSync: closeSync,
 		counts: {
 			writeI2cBlock: [],
 			readI2cBlock: [],
